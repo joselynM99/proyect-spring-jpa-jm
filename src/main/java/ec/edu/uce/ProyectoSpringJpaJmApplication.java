@@ -13,6 +13,7 @@ import ec.edu.uce.service.IPacienteService;
 @SpringBootApplication
 public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 /* TAREA 8 (COMENTADO PARA CONTINUAR CON TALLERES)
+ * 
 	@Autowired
 	private IEstudienteService estudianteService;
 
