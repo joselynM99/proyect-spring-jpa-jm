@@ -17,4 +17,20 @@ public class ProfesorServiceImpl implements IProfesorService {
 		this.profRepo.insertarProfesor(profesor);
 	}
 
+	@Override
+	public void borrarProfesorPorId(Integer id) {
+		this.profRepo.borrarProfesor(id);		
+	}
+
+	@Override
+	public void actualizarProfesor(Profesor libro) {
+		this.profRepo.actualizarProfesor(libro);		
+	}
+
+	@Override
+	public Profesor buscarProfesorPorID(Integer id) {
+		// TODO Auto-generated method stub
+		return this.profRepo.buscarProfesor(id);
+	}
+
 }

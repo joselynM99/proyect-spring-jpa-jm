@@ -1,19 +1,29 @@
 package ec.edu.uce;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import ec.edu.uce.modelo.Paciente;
-import ec.edu.uce.modelo.Receta;
+import ec.edu.uce.modelo.Vehiculo;
+import ec.edu.uce.service.IAnimalService;
+import ec.edu.uce.service.ICancionService;
+import ec.edu.uce.service.ICasaService;
+import ec.edu.uce.service.ICuentaService;
+import ec.edu.uce.service.IEstudienteService;
 import ec.edu.uce.service.IGestorCitaService;
+import ec.edu.uce.service.ILibroService;
 import ec.edu.uce.service.IPacienteService;
+import ec.edu.uce.service.IProfesorService;
+import ec.edu.uce.service.ITiendaService;
+import ec.edu.uce.service.IUniversidadService;
+import ec.edu.uce.service.IVehiculoService;
 
 @SpringBootApplication
 public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
-/* TAREA 8 (COMENTADO PARA CONTINUAR CON TALLERES)
- * 
+
 	@Autowired
 	private IEstudienteService estudianteService;
 
@@ -42,8 +52,8 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 	private IProfesorService profService;
 
 	@Autowired
-	private IUniversidadService uniService;*/
-	
+	private IUniversidadService uniService;
+
 	@Autowired
 	private IPacienteService pacienteService;
 
@@ -57,18 +67,263 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Paciente paciente1 = new Paciente();
-		paciente1.setId(7);
-		paciente1.setNombre("Daniel");
-		paciente1.setApellido("Osoria");
-		paciente1.setEdad(25);
+//TAREA 9 ************************************************************************************************************
+// Animal
+//
+// 		Animal anim1 = new Animal();
+//		anim1.setId(3);
+//		anim1.setEdad(3);
+//		anim1.setNombre("Tob");
+//		anim1.setEspecie("Lobo");
+//		anim1.setPeso(99.00);
+//		anim1.setHabitat("Montaña");
+//
+//		Animal anim2 = new Animal();
+//		anim2.setId(2);
+//		anim2.setEdad(5);
+//		anim2.setNombre("Jerry");
+//		anim2.setEspecie("Felino Grande");
+//		anim2.setPeso(100.00);
+//		anim2.setHabitat("Selva");
 
-		Receta r1 = new Receta();
-		r1.setId(1);
-		r1.setIndicaciones("Reposo por 7 semanas");
-		r1.setMedicamentos("Paracetamol");
+//		this.animalService.insertarAnimalNuevo(anim1);
+//		this.animalService.borrarAnimalPorId(1);
+//		System.out.println("Animal: " + this.animalService.buscarAnimalPorID(2));
+//		this.animalService.actualizarAnimal(anim2);
+//		System.out.println("Animal: " + this.animalService.buscarAnimalPorID(3));
+//		System.out.println("Animal actualizado 2: " + this.animalService.buscarAnimalPorID(2));
 
-		this.gestorCitaService.registrarNuevaConsulta(paciente1, r1);
+//Cancion
+//		
+//		Cancion cancion = new Cancion();
+//		cancion.setId(3);
+//		cancion.setAlbum("Vertigo");
+//		cancion.setCantante("Pablo Alboran");
+//		cancion.setCompositor("Pablo Alboran");
+//		cancion.setGenero("Pop");
+//		cancion.setTitulo("Fiesta");
+//		
+//		Cancion cancion2 = new Cancion();
+//		cancion2.setId(2);
+//		cancion2.setAlbum("Saturno");
+//		cancion2.setCantante("Pablo Alboran");
+//		cancion2.setCompositor("Pablo Alboran");
+//		cancion2.setGenero("Pop");
+//		cancion2.setTitulo("Dicen");
+//		
+//		
+//		this.cancionService.borrarCancionPorId(1);
+//		this.cancionService.insertarCancionNueva(cancion);
+//		System.out.println("Cancion: "+ this.cancionService.buscarCancionPorID(2));
+//		this.cancionService.actualizarCancion(cancion2);
+//		System.out.println("Cancion actualizada: "+ this.cancionService.buscarCancionPorID(2));
+
+//Casa
+//		
+//		Casa casa1 = new Casa();
+//		casa1.setCallePrincipal("Andres Perez");
+//		casa1.setId(2);
+//		casa1.setMaterial("Bloque");
+//		casa1.setNumCasa(76);
+//		casa1.setNumPisos(4);
+//		casa1.setPropietario("Tatiana Viteri");
+//		
+//		Casa casa2 = new Casa();
+//		casa2.setCallePrincipal("Mariscal Sucre");
+//		casa2.setId(3);
+//		casa2.setMaterial("Ladrillo");
+//		casa2.setNumCasa(659);
+//		casa2.setNumPisos(2);
+//		casa2.setPropietario("Abril Hidalgo");
+//		
+//		this.casaService.insertarCasaNueva(casa2);
+//		this.casaService.borrarCasaPorId(1);
+//		System.out.println("Casa: " +this.casaService.buscarCasaPorID(2));
+//		this.casaService.actualizarCasa(casa1);
+//		System.out.println("Casa actualizada: " +this.casaService.buscarCasaPorID(2));
+
+//Cuenta		
+//		
+//		Cuenta cuenta1 = new Cuenta();
+//		cuenta1.setId(2);
+//		cuenta1.setNumCuenta("5458566");
+//		cuenta1.setPropietario("Aslan Lynx");
+//		cuenta1.setSaldo(new BigDecimal(3000));
+//		cuenta1.setTipo("Corriente");
+//		cuenta1.setInteres(new BigDecimal(23));
+//
+//		Cuenta cuenta2 = new Cuenta();
+//		cuenta2.setId(3);
+//		cuenta2.setNumCuenta("5646556");
+//		cuenta2.setPropietario("Ernesto Luna");
+//		cuenta2.setSaldo(new BigDecimal(300000));
+//		cuenta2.setTipo("Corriente");
+//		cuenta2.setInteres(new BigDecimal(2365));
+//
+//		this.cuentaService.insertarCuentaNueva(cuenta2);
+//		this.cuentaService.borrarCuentaPorId(1);
+//		System.out.println("Cuenta: " + this.cuentaService.buscarCuentaPorID(2));
+//		this.cuentaService.actualizarCuenta(cuenta1);
+//		System.out.println("Cuenta actualizada: " + this.cuentaService.buscarCuentaPorID(2));
+
+//Estudiante
+//		
+//		Estudiante estu1 = new Estudiante();
+//		estu1.setId(2);
+//		estu1.setNombre("Pedro");
+//		estu1.setApellido("Martinez");
+//		estu1.setEdad(26);
+//		estu1.setFacultad("Ingeniería");
+//		estu1.setSemestre("Cuarto");
+//		
+//		Estudiante estu2 = new Estudiante();
+//		estu2.setId(4);
+//		estu2.setNombre("Delia");
+//		estu2.setApellido("Lopez");
+//		estu2.setEdad(26);
+//		estu2.setFacultad("Radiología");
+//		estu2.setSemestre("Quinto");
+//		
+//		this.estudianteService.insertarEstudianteNuevo(estu2);
+//		this.estudianteService.borrarEstudiantePorId(3);
+//		System.out.println("Estudiante "+ this.estudianteService.buscarEstudiantePorID(2));
+//		this.estudianteService.actualizarEstudiante(estu1);
+//		System.out.println("Estudiante actualizado: "+this.estudianteService.buscarEstudiantePorID(2));
+
+//Libro		
+//		
+//		Libro lib1 = new Libro();
+//		lib1.setId(2);
+//		lib1.setTitulo("La brújula dorada");
+//		lib1.setAutor("Philip Pullman");
+//		lib1.setEdicion(9);
+//		lib1.setEditorial("Bantam");
+//		lib1.setAnio(2015);
+//		
+//		Libro lib2 = new Libro();
+//		lib2.setId(3);
+//		lib2.setTitulo("Bound by Honor");
+//		lib2.setAutor("Cora Reilly");
+//		lib2.setEdicion(2);
+//		lib2.setEditorial("Bookzinga");
+//		lib2.setAnio(2020);
+//		
+//		this.libroService.insertarLibroNuevo(lib2);
+//		this.libroService.borrarLibroPorId(1);
+//		System.out.println("Libro: "+this.libroService.buscarLibroPorID(2));
+//		this.libroService.actualizarLibro(lib1);
+//		System.out.println("Libro actualizado: "+this.libroService.buscarLibroPorID(2));
+
+//	Profesor	
+//		
+//		Profesor prof = new Profesor();
+//		prof.setId(2);
+//		prof.setNombre("Karla");
+//		prof.setApellido("Quishpe");
+//		prof.setCedula("158953");
+//		prof.setHorasClase(10);
+//		prof.setInstitucion("Politecnica");
+//		
+//		Profesor prof1 = new Profesor();
+//		prof1.setId(3);
+//		prof1.setNombre("Lucas");
+//		prof1.setApellido("Orellana");
+//		prof1.setCedula("170894587");
+//		prof1.setHorasClase(30);
+//		prof1.setInstitucion("UCE");
+//		
+//		this.profService.insertarProfesorNuevo(prof1);
+//		this.profService.borrarProfesorPorId(1);
+//		System.out.println("Profesor: " +this.profService.buscarProfesorPorID(2));
+//		this.profService.actualizarProfesor(prof);
+//		System.out.println("Profesor actualizado: " +this.profService.buscarProfesorPorID(2));
+//		
+
+//TIENDA		
+//		
+//		Tienda tienda = new Tienda();
+//		tienda.setId(2);
+//		tienda.setNombre("Marthita");
+//		tienda.setDireccion("Carcelen");
+//		tienda.setConstoArriendo(new BigDecimal(230));
+//		tienda.setPropietario("Daniela Perez");
+//		tienda.setTipo("De abarrotes");
+//		
+//		Tienda tienda1 = new Tienda();
+//		tienda1.setId(3);
+//		tienda1.setNombre("Kin");
+//		tienda1.setDireccion("Villaflora");
+//		tienda1.setConstoArriendo(new BigDecimal(169));
+//		tienda1.setPropietario("Daniel Martinez");
+//		tienda1.setTipo("Minimarket");
+//		
+//		this.tiendaService.insertarTiendaNueva(tienda1);
+//		this.tiendaService.borrarTiendaPorId(1);
+//		System.out.println("Tienda: "+this.tiendaService.buscarTiendaPorID(2));
+//		this.tiendaService.actualizarTienda(tienda);
+//		System.out.println("Tienda: "+this.tiendaService.buscarTiendaPorID(2));
+
+//Universidad		
+//		
+//		Universidad uni = new Universidad();
+//		uni.setId(2);
+//		uni.setNombre("Escuela Nacional Politecnica Nacional");
+//		uni.setAniosVida(128);
+//		uni.setCiudad("Quito");
+//		uni.setPais("Ecuador");
+//		uni.setNumCarreras(150);
+//		
+//		Universidad uni1 = new Universidad();
+//		uni1.setId(3);
+//		uni1.setNombre("ESPE");
+//		uni1.setAniosVida(100);
+//		uni1.setCiudad("Quito");
+//		uni1.setPais("Ecuador");
+//		uni1.setNumCarreras(55);
+//		
+//		this.uniService.insertarUniversidadNueva(uni1);
+//		this.uniService.borrarUniversidadPorId(1);
+//		System.out.println("Universidad: "+this.uniService.buscarUniversidadPorID(2));
+//		this.uniService.actualizarUniversidad(uni);
+//		System.out.println("Universidad actualizada: "+this.uniService.buscarUniversidadPorID(2));
+
+		Vehiculo veh1 = new Vehiculo();
+		veh1.setId(2);
+		veh1.setMarca("Toyota");
+		veh1.setPaisOrigen("Brasil");
+		veh1.setPlaca("XYk54");
+		veh1.setPrecio(new BigDecimal(230000));
+		veh1.setValorMatricula(new BigDecimal(2000));
+		
+		Vehiculo veh2 = new Vehiculo();
+		veh2.setId(3);
+		veh2.setMarca("Chevrolet");
+		veh2.setPaisOrigen("EEUU");
+		veh2.setPlaca("HUN235");
+		veh2.setPrecio(new BigDecimal(30000));
+		veh2.setValorMatricula(new BigDecimal(200));
+		
+		this.vehiculoService.insertarVehiculoNuevo(veh2);
+		this.vehiculoService.borrarVehiculoPorId(1);
+		System.out.println("Vehiculo: "+this.vehiculoService.buscarVehiculoPorID(2));
+		this.vehiculoService.actualizarVehiculo(veh1);
+		System.out.println("Vehiculo actualizado: "+this.vehiculoService.buscarVehiculoPorID(2));
+		
+
+//****************************************************************************************************************
+
+//		Paciente paciente1 = new Paciente();
+//		paciente1.setId(7);
+//		paciente1.setNombre("Daniel");
+//		paciente1.setApellido("Osoria");
+//		paciente1.setEdad(25);
+//
+//		Receta r1 = new Receta();
+//		r1.setId(1);
+//		r1.setIndicaciones("Reposo por 7 semanas");
+//		r1.setMedicamentos("Paracetamol");
+//
+//		this.gestorCitaService.registrarNuevaConsulta(paciente1, r1);
 
 //		Paciente paciente1 = new Paciente();
 //		paciente1.setId(6);

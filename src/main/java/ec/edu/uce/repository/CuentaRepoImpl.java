@@ -1,6 +1,7 @@
 package ec.edu.uce.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -26,19 +27,25 @@ public class CuentaRepoImpl implements ICuentaRepo {
 
 	@Override
 	public Cuenta buscarCuenta(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		Object[] datosBuscar = new Object[] { id };
+		return this.jdbcTemplate.queryForObject("select * from cuenta where id=?", datosBuscar,
+				new BeanPropertyRowMapper<Cuenta>(Cuenta.class));
 	}
 
 	@Override
 	public void actualizarCuenta(Cuenta cuenta) {
-		// TODO Auto-generated method stub
+		Object[] datosActualizar = new Object[] { cuenta.getId(), cuenta.getPropietario(), cuenta.getSaldo(),
+				cuenta.getTipo(), cuenta.getInteres(), cuenta.getNumCuenta(), cuenta.getId() };
+		this.jdbcTemplate.update(
+				"update cuenta set id=?, propietario=?, saldo=?, tipo=?, interes=?, num_cuenta=? where id=?",
+				datosActualizar);
 
 	}
 
 	@Override
 	public void borrarCuenta(Integer id) {
-		// TODO Auto-generated method stub
+		Object[] datosABorrar = new Object[] { id };
+		this.jdbcTemplate.update("delete from cuenta where id=?", datosABorrar);
 
 	}
 

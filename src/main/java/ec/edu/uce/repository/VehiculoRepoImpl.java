@@ -1,6 +1,7 @@
 package ec.edu.uce.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -25,19 +26,24 @@ public class VehiculoRepoImpl implements IVehiculoRepo {
 
 	@Override
 	public Vehiculo buscarVehiculo(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		Object[] datosBuscar = new Object[] { id };
+		return this.jdbcTemplate.queryForObject("select * from vehiculo where id=?", datosBuscar,
+				new BeanPropertyRowMapper<Vehiculo>(Vehiculo.class));
 	}
 
 	@Override
 	public void actualizarVehiculo(Vehiculo vehiculo) {
-		// TODO Auto-generated method stub
-
+		Object[] datosActualizar = new Object[] { vehiculo.getId(), vehiculo.getMarca(), vehiculo.getPaisOrigen(),
+				vehiculo.getPlaca(), vehiculo.getPrecio(), vehiculo.getValorMatricula(), vehiculo.getId() };
+		this.jdbcTemplate.update(
+				"update vehiculo set id=?, marca=?, pais_origen=?, placa=?, precio=?, valor_matricula=? where id=?",
+				datosActualizar);
 	}
 
 	@Override
 	public void borrarVehiculo(Integer id) {
-		// TODO Auto-generated method stub
+		Object[] datosABorrar = new Object[] { id };
+		this.jdbcTemplate.update("delete from vehiculo where id=?", datosABorrar);
 
 	}
 

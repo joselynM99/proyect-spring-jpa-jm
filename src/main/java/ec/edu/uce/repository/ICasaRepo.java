@@ -10,5 +10,4 @@ public interface ICasaRepo {
 	void actualizarCasa(Casa casa);
 
 	void borrarCasa(Integer id);
-
 }

@@ -1,6 +1,7 @@
 package ec.edu.uce.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -27,19 +28,25 @@ public class CasaRepoImpl implements ICasaRepo {
 
 	@Override
 	public Casa buscarCasa(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		Object[] datosBuscar = new Object[] { id };
+		return this.jdbcTemplate.queryForObject("select * from casa where id=?", datosBuscar,
+				new BeanPropertyRowMapper<Casa>(Casa.class));
 	}
 
 	@Override
 	public void actualizarCasa(Casa casa) {
-		// TODO Auto-generated method stub
+		Object[] datosActualizar = new Object[] { casa.getId(), casa.getMaterial(), casa.getNumCasa(),
+				casa.getPropietario(), casa.getCallePrincipal(), casa.getNumPisos(), casa.getId() };
+		this.jdbcTemplate.update(
+				"update casa set id=?, material=?, num_casa=?, propietario=?, calle_principal=?, num_pisos=? where id=?",
+				datosActualizar);
 
 	}
 
 	@Override
 	public void borrarCasa(Integer id) {
-		// TODO Auto-generated method stub
+		Object[] datosABorrar = new Object[] { id };
+		this.jdbcTemplate.update("delete from casa where id=?", datosABorrar);
 
 	}
 
