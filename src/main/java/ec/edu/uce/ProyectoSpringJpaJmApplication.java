@@ -5,16 +5,26 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import ec.edu.uce.modelo.jpa.Avion;
+import ec.edu.uce.modelo.jpa.Ciudad;
+import ec.edu.uce.modelo.jpa.FiguraGeometrica;
+import ec.edu.uce.modelo.jpa.Fruta;
 import ec.edu.uce.modelo.jpa.Guardia;
+import ec.edu.uce.modelo.jpa.Pelicula;
 import ec.edu.uce.service.IAnimalService;
+import ec.edu.uce.service.IAvionService;
 import ec.edu.uce.service.ICancionService;
 import ec.edu.uce.service.ICasaService;
+import ec.edu.uce.service.ICiudadService;
 import ec.edu.uce.service.ICuentaService;
 import ec.edu.uce.service.IEstudienteService;
+import ec.edu.uce.service.IFiguraGeometricaService;
+import ec.edu.uce.service.IFrutaService;
 import ec.edu.uce.service.IGestorCitaService;
 import ec.edu.uce.service.IGuardiaService;
 import ec.edu.uce.service.ILibroService;
 import ec.edu.uce.service.IPacienteService;
+import ec.edu.uce.service.IPeliculaService;
 import ec.edu.uce.service.IProfesorService;
 import ec.edu.uce.service.ITiendaService;
 import ec.edu.uce.service.IUniversidadService;
@@ -61,6 +71,21 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 	
 	@Autowired
 	private IGuardiaService guardiaService;
+	
+	@Autowired
+	private IAvionService avionService;
+	
+	@Autowired
+	private ICiudadService ciudadService;
+	
+	@Autowired
+	private IFiguraGeometricaService figuraService;
+	
+	@Autowired
+	private IFrutaService frutaService;
+	
+	@Autowired
+	private IPeliculaService peliculaService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoSpringJpaJmApplication.class, args);
@@ -69,18 +94,100 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Guardia g1= new Guardia();
-		g1.setNombre("Lorenzo");
-		g1.setApellido("Torrez");
-		g1.setEdificio("Naciones Unidas");
-		this.guardiaService.guardarGuardia(g1);
+//		Guardia g1= new Guardia();
+//		g1.setNombre("Lorenzo");
+//		g1.setApellido("Torrez");
+//		g1.setEdificio("Naciones Unidas");
+//		this.guardiaService.guardarGuardia(g1);
+//		
+//		Guardia g2= new Guardia();
+//		g2.setId(3);
+//		g2.setNombre("Lucas");
+//		g2.setApellido("Martines");
+//		g2.setEdificio("Villaflora");
+//		this.guardiaService.actualizar(g2);
 		
-		Guardia g2= new Guardia();
-		g2.setId(3);
-		g2.setNombre("Lucas");
-		g2.setApellido("Martines");
-		g2.setEdificio("Villaflora");
-		this.guardiaService.actualizar(g2);
+		
+		
+//Tarea 10	**************************************************************
+		
+		Avion av1 = new Avion();
+		av1.setModelo("boeing 700");
+		av1.setNumMotores(2);
+		av1.setVelocidad(1000.00);
+		
+		Avion av2 = new Avion();
+		av2.setId(11);
+		av2.setModelo("Boeing 737");
+		av2.setNumMotores(2);
+		av2.setVelocidad(999.00);
+		
+		//this.avionService.guardarAvion(av1);
+		this.avionService.actualizar(av2);
+		
+		
+		Ciudad c1 = new Ciudad();
+		c1.setId(9);
+		c1.setNombre("Los Angeles");
+		c1.setNumPobladores(1000000);
+		c1.setPais("EEUU");
+		
+		Ciudad c2 = new Ciudad();
+		c2.setNombre("Paris");
+		c2.setNumPobladores(1600000);
+		c2.setPais("Francia");
+		
+		//this.ciudadService.guardarCiudad(c2);
+		this.ciudadService.actualizar(c1);
+		
+		FiguraGeometrica f1 = new FiguraGeometrica();
+		f1.setId(17);
+		f1.setNombre("Circulo");
+		f1.setArea(56.00);
+		f1.setPerimetro(30.36);
+		
+		FiguraGeometrica f2 = new FiguraGeometrica();
+		f2.setNombre("Traingulo");
+		f2.setArea(6.00);
+		f2.setPerimetro(3.00);
+		
+		//this.figuraService.guardarFigura(f2);
+		this.figuraService.actualizar(f1);
+		
+		Fruta fr1 = new Fruta();
+		fr1.setColor("Verde");
+		fr1.setNombre("Manzana");
+		fr1.setTipoSemilla("multiple");
+		
+		Fruta fr2 = new Fruta();
+		fr2.setId(30);
+		fr2.setColor("Amarillo");
+		fr2.setNombre("Piña");
+		fr2.setTipoSemilla("tronco");
+		
+		//this.frutaService.guardarFruta(fr1);
+		this.frutaService.actualizar(fr2);
+		
+		Pelicula p1 = new Pelicula();
+		p1.setId(31);
+		p1.setTitulo("Orgullo y prejuicio");
+		p1.setDirector("Joe Wright");
+		p1.setProductor("Tim Bevan");
+		
+		Pelicula p2 = new Pelicula();
+		p2.setTitulo("Your Name");
+		p2.setDirector("Makoto Shinkai");
+		p2.setProductor("Makoto Shinkai");
+		
+		this.peliculaService.guardarPelicula(p2);
+		this.peliculaService.actualizar(p1);
+		
+		
+		
+		
+		
+		
+		
 
 //TAREA 9 ************************************************************************************************************
 // Animal

@@ -1,0 +1,25 @@
+package ec.edu.uce.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import ec.edu.uce.modelo.jpa.Fruta;
+import ec.edu.uce.repository.jpa.IFrutaRepo;
+
+@Service
+public class FrutaServiceImpl implements IFrutaService {
+
+	@Autowired
+	private IFrutaRepo frutaRepo;
+
+	@Override
+	public void guardarFruta(Fruta fruta) {
+		this.frutaRepo.insertarFruta(fruta);
+	}
+
+	@Override
+	public void actualizar(Fruta fruta) {
+		this.frutaRepo.actualizarFruta(fruta);
+	}
+
+}
