@@ -1,19 +1,18 @@
 package ec.edu.uce;
 
-import java.math.BigDecimal;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import ec.edu.uce.modelo.Vehiculo;
+import ec.edu.uce.modelo.jpa.Guardia;
 import ec.edu.uce.service.IAnimalService;
 import ec.edu.uce.service.ICancionService;
 import ec.edu.uce.service.ICasaService;
 import ec.edu.uce.service.ICuentaService;
 import ec.edu.uce.service.IEstudienteService;
 import ec.edu.uce.service.IGestorCitaService;
+import ec.edu.uce.service.IGuardiaService;
 import ec.edu.uce.service.ILibroService;
 import ec.edu.uce.service.IPacienteService;
 import ec.edu.uce.service.IProfesorService;
@@ -59,6 +58,9 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 
 	@Autowired
 	private IGestorCitaService gestorCitaService;
+	
+	@Autowired
+	private IGuardiaService guardiaService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoSpringJpaJmApplication.class, args);
@@ -66,6 +68,19 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		
+		Guardia g1= new Guardia();
+		g1.setNombre("Lorenzo");
+		g1.setApellido("Torrez");
+		g1.setEdificio("Naciones Unidas");
+		this.guardiaService.guardarGuardia(g1);
+		
+		Guardia g2= new Guardia();
+		g2.setId(3);
+		g2.setNombre("Lucas");
+		g2.setApellido("Martines");
+		g2.setEdificio("Villaflora");
+		this.guardiaService.actualizar(g2);
 
 //TAREA 9 ************************************************************************************************************
 // Animal
@@ -287,27 +302,27 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 //		this.uniService.actualizarUniversidad(uni);
 //		System.out.println("Universidad actualizada: "+this.uniService.buscarUniversidadPorID(2));
 
-		Vehiculo veh1 = new Vehiculo();
-		veh1.setId(2);
-		veh1.setMarca("Toyota");
-		veh1.setPaisOrigen("Brasil");
-		veh1.setPlaca("XYk54");
-		veh1.setPrecio(new BigDecimal(230000));
-		veh1.setValorMatricula(new BigDecimal(2000));
-		
-		Vehiculo veh2 = new Vehiculo();
-		veh2.setId(3);
-		veh2.setMarca("Chevrolet");
-		veh2.setPaisOrigen("EEUU");
-		veh2.setPlaca("HUN235");
-		veh2.setPrecio(new BigDecimal(30000));
-		veh2.setValorMatricula(new BigDecimal(200));
-		
-		this.vehiculoService.insertarVehiculoNuevo(veh2);
-		this.vehiculoService.borrarVehiculoPorId(1);
-		System.out.println("Vehiculo: "+this.vehiculoService.buscarVehiculoPorID(2));
-		this.vehiculoService.actualizarVehiculo(veh1);
-		System.out.println("Vehiculo actualizado: "+this.vehiculoService.buscarVehiculoPorID(2));
+//		Vehiculo veh1 = new Vehiculo();
+//		veh1.setId(2);
+//		veh1.setMarca("Toyota");
+//		veh1.setPaisOrigen("Brasil");
+//		veh1.setPlaca("XYk54");
+//		veh1.setPrecio(new BigDecimal(230000));
+//		veh1.setValorMatricula(new BigDecimal(2000));
+//		
+//		Vehiculo veh2 = new Vehiculo();
+//		veh2.setId(3);
+//		veh2.setMarca("Chevrolet");
+//		veh2.setPaisOrigen("EEUU");
+//		veh2.setPlaca("HUN235");
+//		veh2.setPrecio(new BigDecimal(30000));
+//		veh2.setValorMatricula(new BigDecimal(200));
+//		
+//		this.vehiculoService.insertarVehiculoNuevo(veh2);
+//		this.vehiculoService.borrarVehiculoPorId(1);
+//		System.out.println("Vehiculo: "+this.vehiculoService.buscarVehiculoPorID(2));
+//		this.vehiculoService.actualizarVehiculo(veh1);
+//		System.out.println("Vehiculo actualizado: "+this.vehiculoService.buscarVehiculoPorID(2));
 		
 
 //****************************************************************************************************************
