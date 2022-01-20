@@ -10,5 +10,7 @@ public interface IFrutaRepo {
 	Fruta buscarFrutaPorID(Integer id);
 
 	void borrarFrutaPorId(Integer id);
+	
+	Fruta buscarFrutaPorColor(String color);
 
 }

@@ -2,6 +2,7 @@ package ec.edu.uce.repository.jpa;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -27,14 +28,25 @@ public class PeliculaRepoImpl implements IPeliculaRepo {
 
 	@Override
 	public Pelicula buscarPeliculaPorID(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.entityManager.find(Pelicula.class, id);
 	}
 
 	@Override
 	public void borrarPeliculaPorId(Integer id) {
-		// TODO Auto-generated method stub
+		Pelicula peliculaABorrar = this.buscarPeliculaPorID(id);
+		this.entityManager.remove(peliculaABorrar);
+	}
 
+	@Override
+	public Pelicula buscarPeliculaPorDirector(String director) {
+		// SQL: select * from pelicula where director = 'dir'
+
+		// JPQL: select p from Pelicula p where p.director =:valor
+
+		Query miQuery = this.entityManager.createQuery("select p from Pelicula p where p.director =:valor");
+		miQuery.setParameter("valor", director);
+		Pelicula miPelicula = (Pelicula) miQuery.getSingleResult();
+		return miPelicula;
 	}
 
 }

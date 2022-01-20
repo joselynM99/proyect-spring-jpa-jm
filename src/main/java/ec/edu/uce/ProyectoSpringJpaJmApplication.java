@@ -116,6 +116,58 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 		
 		System.out.println(gApellido);
 		
+//Tarea 11***************************************************************************		
+		//Avion
+		
+		this.avionService.borrar(28);
+		
+		Avion av27 = this.avionService.buscar(27);
+		System.out.println(av27);
+		
+		Avion avModelo = this.avionService.buscarPorModelo("Boeing 737");
+		System.out.println(avModelo);
+		
+		//Ciudad
+		
+		this.ciudadService.borrar(22);
+		
+		Ciudad c10 = this.ciudadService.buscar(10);
+		System.out.println(c10);
+		
+		Ciudad cNombre = this.ciudadService.buscarCiudadPorNombre("Madrid");
+		System.out.println(cNombre);
+		
+		//FiguraGeometrica
+		
+		this.figuraService.borrar(41);
+		
+		FiguraGeometrica fg17 = this.figuraService.buscar(17);
+		System.out.println(fg17);
+		
+		FiguraGeometrica fgNombre = this.figuraService.buscarFiguraPorNombre("Circulo");
+		System.out.println(fgNombre);
+		
+		//Fruta
+		
+		this.frutaService.borrar(42);
+		
+		Fruta fr28 = this.frutaService.buscar(28);
+		System.out.println(fr28);
+		
+		Fruta frColor = this.frutaService.buscarFrutaPorColor("Rojo");
+		System.out.println(frColor);
+		
+		//Pelicula
+		
+		this.peliculaService.borrar(42);
+		
+		Pelicula pl32 = this.peliculaService.buscar(32);
+		System.out.println(pl32);
+		
+		Pelicula plDir = this.peliculaService.buscarPeliculaPorDirector("Joe Wright");
+		System.out.println(plDir);
+		
+		
 		
 //Tarea 10	**************************************************************
 		

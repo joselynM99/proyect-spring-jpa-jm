@@ -10,4 +10,6 @@ public interface ICiudadRepo {
 	Ciudad buscarCiudadPorID(Integer id);
 
 	void borrarCiudadPorId(Integer id);
+	
+	Ciudad buscarCiudadPorNombre(String nombre);
 }

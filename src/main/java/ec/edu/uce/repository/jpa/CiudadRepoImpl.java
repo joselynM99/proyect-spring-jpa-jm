@@ -2,6 +2,7 @@ package ec.edu.uce.repository.jpa;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -27,14 +28,25 @@ public class CiudadRepoImpl implements ICiudadRepo {
 
 	@Override
 	public Ciudad buscarCiudadPorID(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.entityManager.find(Ciudad.class, id);
 	}
 
 	@Override
 	public void borrarCiudadPorId(Integer id) {
-		// TODO Auto-generated method stub
+		Ciudad ciudadABorrar = this.buscarCiudadPorID(id);
+		this.entityManager.remove(ciudadABorrar);
+	}
 
+	@Override
+	public Ciudad buscarCiudadPorNombre(String nombre) {
+		// SQL: select * from ciudad where nombre = 'nom'
+
+		// JPQL: select c from Ciudad c where c.nombre =:valor
+
+		Query miQuery = this.entityManager.createQuery("select c from Ciudad c where c.nombre =:valor");
+		miQuery.setParameter("valor", nombre);
+		Ciudad miCiudad = (Ciudad) miQuery.getSingleResult();
+		return miCiudad;
 	}
 
 }

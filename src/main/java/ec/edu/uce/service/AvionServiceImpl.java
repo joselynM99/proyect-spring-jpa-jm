@@ -22,4 +22,19 @@ public class AvionServiceImpl implements IAvionService {
 		this.avionRepo.actualizarAvion(avion);
 	}
 
+	@Override
+	public Avion buscar(Integer id) {
+		return this.avionRepo.buscarAvionPorID(id);
+	}
+
+	@Override
+	public void borrar(Integer id) {
+		this.avionRepo.borrarAvionPorId(id);
+	}
+
+	@Override
+	public Avion buscarPorModelo(String modelo) {
+		return this.avionRepo.buscarPorModelo(modelo);
+	}
+
 }

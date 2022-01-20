@@ -11,4 +11,6 @@ public interface IFiguraGeometricaRepo {
 	FiguraGeometrica buscarFiguraGeometricaPorID(Integer id);
 
 	void borrarFiguraGeometricaPorId(Integer id);
+	
+	FiguraGeometrica buscarFiguraPorNombre(String nombre);
 }

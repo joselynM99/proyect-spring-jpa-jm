@@ -11,5 +11,7 @@ public interface IAvionRepo {
 	Avion buscarAvionPorID(Integer id);
 
 	void borrarAvionPorId(Integer id);
+	
+	Avion buscarPorModelo(String modelo);
 
 }

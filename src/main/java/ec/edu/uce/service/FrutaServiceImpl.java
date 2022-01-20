@@ -22,4 +22,20 @@ public class FrutaServiceImpl implements IFrutaService {
 		this.frutaRepo.actualizarFruta(fruta);
 	}
 
+	@Override
+	public Fruta buscar(Integer id) {
+		return this.frutaRepo.buscarFrutaPorID(id);
+	}
+
+	@Override
+	public void borrar(Integer id) {
+		this.frutaRepo.borrarFrutaPorId(id);
+		
+	}
+
+	@Override
+	public Fruta buscarFrutaPorColor(String color) {
+		return this.frutaRepo.buscarFrutaPorColor(color);
+	}
+
 }

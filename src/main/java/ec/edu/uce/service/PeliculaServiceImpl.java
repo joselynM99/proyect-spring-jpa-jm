@@ -22,4 +22,19 @@ public class PeliculaServiceImpl implements IPeliculaService {
 		this.peliculaRepo.actualizarPelicula(pelicula);
 	}
 
+	@Override
+	public Pelicula buscar(Integer id) {
+		return this.peliculaRepo.buscarPeliculaPorID(id);
+	}
+
+	@Override
+	public void borrar(Integer id) {
+		this.peliculaRepo.borrarPeliculaPorId(id);
+	}
+
+	@Override
+	public Pelicula buscarPeliculaPorDirector(String director) {
+		return this.peliculaRepo.buscarPeliculaPorDirector(director);
+	}
+
 }

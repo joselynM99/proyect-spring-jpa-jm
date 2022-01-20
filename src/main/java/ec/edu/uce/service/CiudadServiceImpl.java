@@ -22,4 +22,19 @@ public class CiudadServiceImpl implements ICiudadService {
 		this.ciudadRepo.actualizarCiudad(ciudad);
 	}
 
+	@Override
+	public Ciudad buscar(Integer id) {
+		return this.ciudadRepo.buscarCiudadPorID(id);
+	}
+
+	@Override
+	public void borrar(Integer id) {
+		this.ciudadRepo.borrarCiudadPorId(id);
+	}
+
+	@Override
+	public Ciudad buscarCiudadPorNombre(String nombre) {
+		return this.ciudadRepo.buscarCiudadPorNombre(nombre);
+	}
+
 }

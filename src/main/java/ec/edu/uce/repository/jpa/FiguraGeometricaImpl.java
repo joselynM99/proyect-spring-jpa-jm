@@ -2,6 +2,7 @@ package ec.edu.uce.repository.jpa;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -27,14 +28,25 @@ public class FiguraGeometricaImpl implements IFiguraGeometricaRepo {
 
 	@Override
 	public FiguraGeometrica buscarFiguraGeometricaPorID(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.entityManager.find(FiguraGeometrica.class, id);
 	}
 
 	@Override
 	public void borrarFiguraGeometricaPorId(Integer id) {
-		// TODO Auto-generated method stub
+		FiguraGeometrica figuraABorrar = this.buscarFiguraGeometricaPorID(id);
+		this.entityManager.remove(figuraABorrar);
+	}
 
+	@Override
+	public FiguraGeometrica buscarFiguraPorNombre(String nombre) {
+		// SQL: select * from figura_geometrica where nombre = 'nom'
+
+		// JPQL: select f from FiguraGeometrica f where f.nombre =:valor
+
+		Query miQuery = this.entityManager.createQuery("select f from FiguraGeometrica f where f.nombre =:valor");
+		miQuery.setParameter("valor", nombre);
+		FiguraGeometrica miFigura = (FiguraGeometrica) miQuery.getSingleResult();
+		return miFigura;
 	}
 
 }
