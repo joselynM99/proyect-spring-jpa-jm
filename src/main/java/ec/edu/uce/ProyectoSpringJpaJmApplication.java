@@ -1,16 +1,13 @@
 package ec.edu.uce;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import ec.edu.uce.modelo.jpa.Avion;
-import ec.edu.uce.modelo.jpa.Ciudad;
-import ec.edu.uce.modelo.jpa.FiguraGeometrica;
-import ec.edu.uce.modelo.jpa.Fruta;
 import ec.edu.uce.modelo.jpa.Guardia;
-import ec.edu.uce.modelo.jpa.Pelicula;
 import ec.edu.uce.service.IAnimalService;
 import ec.edu.uce.service.IAvionService;
 import ec.edu.uce.service.ICancionService;
@@ -32,6 +29,8 @@ import ec.edu.uce.service.IVehiculoService;
 
 @SpringBootApplication
 public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
+
+	private static final Logger LOG = LoggerFactory.getLogger(ProyectoSpringJpaJmApplication.class);
 
 	@Autowired
 	private IEstudienteService estudianteService;
@@ -68,22 +67,22 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 
 	@Autowired
 	private IGestorCitaService gestorCitaService;
-	
+
 	@Autowired
 	private IGuardiaService guardiaService;
-	
+
 	@Autowired
 	private IAvionService avionService;
-	
+
 	@Autowired
 	private ICiudadService ciudadService;
-	
+
 	@Autowired
 	private IFiguraGeometricaService figuraService;
-	
+
 	@Autowired
 	private IFrutaService frutaService;
-	
+
 	@Autowired
 	private IPeliculaService peliculaService;
 
@@ -93,7 +92,7 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		
+
 //		Guardia g1= new Guardia();
 //		g1.setNombre("Lucas");
 //		g1.setApellido("Torrez");
@@ -106,71 +105,78 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 //		g2.setApellido("Martines");
 //		g2.setEdificio("Villaflora");
 //		this.guardiaService.actualizar(g2);
-		
-		Guardia g52 =this.guardiaService.buscar(102);
-		System.out.println(g52);
-		
-		//this.guardiaService.borrar(52);
-		
-		Guardia gApellido = this.guardiaService.buscarPorApellido("Martines");
-		
-		System.out.println(gApellido);
-		
+
+		// Guardia g52 =this.guardiaService.buscar(102);
+		// System.out.println(g52);
+
+		// this.guardiaService.borrar(52);
+
+//		Guardia gApellido = this.guardiaService.buscarListaGuardiasPorApellido("Torrez");
+//		
+//		System.out.println(gApellido);
+
+		// busqueda con Typed
+//		Guardia gApellido = this.guardiaService.buscarPorApellidoTyped("Martines");
+//		System.out.println(gApellido);
+
+		//Busqueda con Named
+		Guardia gApellido = this.guardiaService.buscarPorApellidoNamed("Martines");
+		LOG.info("El guardia es: "+gApellido);
+
 //Tarea 11***************************************************************************		
-		//Avion
-		
-		this.avionService.borrar(28);
-		
-		Avion av27 = this.avionService.buscar(27);
-		System.out.println(av27);
-		
-		Avion avModelo = this.avionService.buscarPorModelo("Boeing 737");
-		System.out.println(avModelo);
-		
-		//Ciudad
-		
-		this.ciudadService.borrar(22);
-		
-		Ciudad c10 = this.ciudadService.buscar(10);
-		System.out.println(c10);
-		
-		Ciudad cNombre = this.ciudadService.buscarCiudadPorNombre("Madrid");
-		System.out.println(cNombre);
-		
-		//FiguraGeometrica
-		
-		this.figuraService.borrar(41);
-		
-		FiguraGeometrica fg17 = this.figuraService.buscar(17);
-		System.out.println(fg17);
-		
-		FiguraGeometrica fgNombre = this.figuraService.buscarFiguraPorNombre("Circulo");
-		System.out.println(fgNombre);
-		
-		//Fruta
-		
-		this.frutaService.borrar(42);
-		
-		Fruta fr28 = this.frutaService.buscar(28);
-		System.out.println(fr28);
-		
-		Fruta frColor = this.frutaService.buscarFrutaPorColor("Rojo");
-		System.out.println(frColor);
-		
-		//Pelicula
-		
-		this.peliculaService.borrar(42);
-		
-		Pelicula pl32 = this.peliculaService.buscar(32);
-		System.out.println(pl32);
-		
-		Pelicula plDir = this.peliculaService.buscarPeliculaPorDirector("Joe Wright");
-		System.out.println(plDir);
-		
-		
-		
+//		//Avion
+//		
+//		this.avionService.borrar(28);
+//		
+//		Avion av27 = this.avionService.buscar(27);
+//		System.out.println(av27);
+//		
+//		Avion avModelo = this.avionService.buscarPorModelo("Boeing 737");
+//		System.out.println(avModelo);
+//		
+//		//Ciudad
+//		
+//		this.ciudadService.borrar(22);
+//		
+//		Ciudad c10 = this.ciudadService.buscar(10);
+//		System.out.println(c10);
+//		
+//		Ciudad cNombre = this.ciudadService.buscarCiudadPorNombre("Madrid");
+//		System.out.println(cNombre);
+//		
+//		//FiguraGeometrica
+//		
+//		this.figuraService.borrar(41);
+//		
+//		FiguraGeometrica fg17 = this.figuraService.buscar(17);
+//		System.out.println(fg17);
+//		
+//		FiguraGeometrica fgNombre = this.figuraService.buscarFiguraPorNombre("Circulo");
+//		System.out.println(fgNombre);
+//		
+//		//Fruta
+//		
+//		this.frutaService.borrar(42);
+//		
+//		Fruta fr28 = this.frutaService.buscar(28);
+//		System.out.println(fr28);
+//		
+//		Fruta frColor = this.frutaService.buscarFrutaPorColor("Rojo");
+//		System.out.println(frColor);
+//		
+//		//Pelicula
+//		
+//		this.peliculaService.borrar(42);
+//		
+//		Pelicula pl32 = this.peliculaService.buscar(32);
+//		System.out.println(pl32);
+//		
+//		Pelicula plDir = this.peliculaService.buscarPeliculaPorDirector("Joe Wright");
+//		System.out.println(plDir);
+//		
+
 //Tarea 10	**************************************************************
-		
+
 //		Avion av1 = new Avion();
 //		av1.setModelo("boeing 700");
 //		av1.setNumMotores(2);
@@ -244,10 +250,6 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 //		
 //		
 //		
-		
-		
-		
-		
 
 //TAREA 9 ************************************************************************************************************
 // Animal
@@ -490,7 +492,6 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 //		System.out.println("Vehiculo: "+this.vehiculoService.buscarVehiculoPorID(2));
 //		this.vehiculoService.actualizarVehiculo(veh1);
 //		System.out.println("Vehiculo actualizado: "+this.vehiculoService.buscarVehiculoPorID(2));
-		
 
 //****************************************************************************************************************
 

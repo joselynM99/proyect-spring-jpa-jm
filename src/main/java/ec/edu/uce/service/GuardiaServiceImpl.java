@@ -8,7 +8,7 @@ import ec.edu.uce.repository.jpa.IGuardiaRepo;
 
 @Service
 public class GuardiaServiceImpl implements IGuardiaService {
-	
+
 	@Autowired
 	private IGuardiaRepo guardiaRepo;
 
@@ -19,7 +19,7 @@ public class GuardiaServiceImpl implements IGuardiaService {
 
 	@Override
 	public void actualizar(Guardia guardia) {
-		this.guardiaRepo.actualizarGuardia(guardia);		
+		this.guardiaRepo.actualizarGuardia(guardia);
 	}
 
 	@Override
@@ -29,12 +29,27 @@ public class GuardiaServiceImpl implements IGuardiaService {
 
 	@Override
 	public void borrar(Integer id) {
-		this.guardiaRepo.borrarGuardiaPorId(id);		
+		this.guardiaRepo.borrarGuardiaPorId(id);
 	}
 
 	@Override
 	public Guardia buscarPorApellido(String apellido) {
 		return this.guardiaRepo.buscarGuardiaPorApellido(apellido);
+	}
+
+	@Override
+	public Guardia buscarPorApellidoTyped(String apellido) {
+		return this.guardiaRepo.buscarGuardiasPorApellidoType(apellido);
+	}
+
+	@Override
+	public Guardia buscarPorApellidoNamed(String apellido) {
+		return this.guardiaRepo.buscarGuardiasPorApellidoNamed(apellido);
+	}
+
+	@Override
+	public Guardia buscarListaGuardiasPorApellido(String apellido) {
+		return this.guardiaRepo.buscarListaGuardiasPorApellido(apellido);
 	}
 
 }
