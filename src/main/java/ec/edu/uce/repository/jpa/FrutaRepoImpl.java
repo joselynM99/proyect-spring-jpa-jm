@@ -3,6 +3,7 @@ package ec.edu.uce.repository.jpa;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -47,6 +48,21 @@ public class FrutaRepoImpl implements IFrutaRepo {
 		miQuery.setParameter("valor", color);
 		Fruta miFruta = (Fruta) miQuery.getSingleResult();
 		return miFruta;
+	}
+
+	@Override
+	public Fruta buscarFrutaPorColorTyped(String color) {
+		TypedQuery<Fruta> myTypedQuery = (TypedQuery<Fruta>) this.entityManager
+				.createQuery("select fr from Fruta fr where fr.color =:valor");
+		myTypedQuery.setParameter("valor", color);
+		return myTypedQuery.getSingleResult();
+	}
+
+	@Override
+	public Fruta buscarFrutaPorColorNamed(String color) {
+		Query miQuery = this.entityManager.createNamedQuery("Fruta.buscarPorColor");
+		miQuery.setParameter("valor", color);
+		return (Fruta) miQuery.getSingleResult();
 	}
 
 }

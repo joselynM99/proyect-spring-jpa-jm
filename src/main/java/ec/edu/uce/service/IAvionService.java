@@ -12,5 +12,9 @@ public interface IAvionService {
 	void borrar(Integer id);
 
 	Avion buscarPorModelo(String modelo);
+	
+	Avion buscarPorModeloType(String modelo);
+
+	Avion buscarPorModeloNamed(String modelo);
 
 }

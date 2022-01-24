@@ -13,4 +13,8 @@ public interface IFrutaService {
 	void borrar(Integer id);
 
 	Fruta buscarFrutaPorColor(String color);
+
+	Fruta buscarFrutaPorColorTyped(String color);
+
+	Fruta buscarFrutaPorColorNamed(String color);
 }

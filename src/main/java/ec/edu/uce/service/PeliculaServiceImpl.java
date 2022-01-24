@@ -37,4 +37,14 @@ public class PeliculaServiceImpl implements IPeliculaService {
 		return this.peliculaRepo.buscarPeliculaPorDirector(director);
 	}
 
+	@Override
+	public Pelicula buscarPeliculaPorDirectorTyped(String director) {
+		return this.peliculaRepo.buscarPeliculaPorDirectorTyped(director);
+	}
+
+	@Override
+	public Pelicula buscarPeliculaPorDirectorNamed(String director) {
+		return this.peliculaRepo.buscarPeliculaPorDirectorNamed(director);
+	}
+
 }

@@ -37,4 +37,14 @@ public class AvionServiceImpl implements IAvionService {
 		return this.avionRepo.buscarPorModelo(modelo);
 	}
 
+	@Override
+	public Avion buscarPorModeloType(String modelo) {
+		return this.avionRepo.buscarPorModeloType(modelo);
+	}
+
+	@Override
+	public Avion buscarPorModeloNamed(String modelo) {
+		return this.avionRepo.buscarPorModeloNamed(modelo);
+	}
+
 }

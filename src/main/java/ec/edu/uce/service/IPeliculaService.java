@@ -13,4 +13,8 @@ public interface IPeliculaService {
 	void borrar(Integer id);
 
 	Pelicula buscarPeliculaPorDirector(String director);
+
+	Pelicula buscarPeliculaPorDirectorTyped(String director);
+
+	Pelicula buscarPeliculaPorDirectorNamed(String director);
 }

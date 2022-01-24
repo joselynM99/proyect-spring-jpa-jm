@@ -3,6 +3,7 @@ package ec.edu.uce.repository.jpa;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -47,6 +48,21 @@ public class FiguraGeometricaImpl implements IFiguraGeometricaRepo {
 		miQuery.setParameter("valor", nombre);
 		FiguraGeometrica miFigura = (FiguraGeometrica) miQuery.getSingleResult();
 		return miFigura;
+	}
+
+	@Override
+	public FiguraGeometrica buscarFiguraPorNombreType(String nombre) {
+		TypedQuery<FiguraGeometrica> myTypedQuery = (TypedQuery<FiguraGeometrica>) this.entityManager
+				.createQuery("select f from FiguraGeometrica f where f.nombre =:valor");
+		myTypedQuery.setParameter("valor", nombre);
+		return myTypedQuery.getSingleResult();
+	}
+
+	@Override
+	public FiguraGeometrica buscarFiguraPorNombreNamed(String nombre) {
+		Query miQuery = this.entityManager.createNamedQuery("FiguraGeometrica.buscarPorNombre");
+		miQuery.setParameter("valor", nombre);
+		return (FiguraGeometrica) miQuery.getSingleResult();
 	}
 
 }

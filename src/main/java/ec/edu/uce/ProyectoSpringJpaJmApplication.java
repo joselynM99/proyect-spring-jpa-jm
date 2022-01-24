@@ -7,7 +7,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import ec.edu.uce.modelo.jpa.Avion;
+import ec.edu.uce.modelo.jpa.Ciudad;
+import ec.edu.uce.modelo.jpa.FiguraGeometrica;
+import ec.edu.uce.modelo.jpa.Fruta;
 import ec.edu.uce.modelo.jpa.Guardia;
+import ec.edu.uce.modelo.jpa.Pelicula;
 import ec.edu.uce.service.IAnimalService;
 import ec.edu.uce.service.IAvionService;
 import ec.edu.uce.service.ICancionService;
@@ -119,9 +124,42 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 //		Guardia gApellido = this.guardiaService.buscarPorApellidoTyped("Martines");
 //		System.out.println(gApellido);
 
-		//Busqueda con Named
+		// Busqueda con Named
 		Guardia gApellido = this.guardiaService.buscarPorApellidoNamed("Martines");
-		LOG.info("El guardia es: "+gApellido);
+		LOG.info("El guardia es: " + gApellido);
+
+//Tarea 12***************************************************************************
+
+		Avion avModeloType = this.avionService.buscarPorModeloType("Boeing 737");
+		LOG.info("El avion es: " + avModeloType);
+
+		Avion avModeloNamed = this.avionService.buscarPorModeloNamed("Boeing 737");
+		LOG.info("El avion es: " + avModeloNamed);
+
+		Ciudad ciuNombreType = this.ciudadService.buscarCiudadPorNombreType("Los Angeles");
+		LOG.info("La ciudad es: " + ciuNombreType);
+
+		Ciudad ciuNombreNamed = this.ciudadService.buscarCiudadPorNombreNemed("Los Angeles");
+		LOG.info("La ciudad es: " + ciuNombreNamed);
+
+		FiguraGeometrica figNombreType = this.figuraService.buscarFiguraPorNombreType("Circulo");
+		LOG.info("La figura es: " + figNombreType);
+
+		FiguraGeometrica figNombreNamed = this.figuraService.buscarFiguraPorNombreNamed("Circulo");
+		LOG.info("La figura es: " + figNombreNamed);
+
+		Fruta frColorTyped = this.frutaService.buscarFrutaPorColorTyped("Amarillo");
+		LOG.info("La fruta es: " + frColorTyped);
+
+		Fruta frColorNamed = this.frutaService.buscarFrutaPorColorNamed("Amarillo");
+		LOG.info("La fruta es: " + frColorNamed);
+		
+
+		Pelicula plDirectorType = this.peliculaService.buscarPeliculaPorDirectorTyped("Joe Wright");
+		LOG.info("La pelicula es: "+plDirectorType);
+		
+		Pelicula plDirectorNamed = this.peliculaService.buscarPeliculaPorDirectorNamed("Joe Wright");
+		LOG.info("La pelicula es: "+plDirectorNamed);
 
 //Tarea 11***************************************************************************		
 //		//Avion

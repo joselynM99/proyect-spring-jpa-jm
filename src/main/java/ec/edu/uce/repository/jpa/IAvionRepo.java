@@ -3,7 +3,7 @@ package ec.edu.uce.repository.jpa;
 import ec.edu.uce.modelo.jpa.Avion;
 
 public interface IAvionRepo {
-	
+
 	void insertarAvion(Avion avion);
 
 	void actualizarAvion(Avion avion);
@@ -11,7 +11,11 @@ public interface IAvionRepo {
 	Avion buscarAvionPorID(Integer id);
 
 	void borrarAvionPorId(Integer id);
-	
+
 	Avion buscarPorModelo(String modelo);
+
+	Avion buscarPorModeloType(String modelo);
+
+	Avion buscarPorModeloNamed(String modelo);
 
 }

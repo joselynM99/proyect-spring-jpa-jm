@@ -3,6 +3,7 @@ package ec.edu.uce.repository.jpa;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -47,6 +48,21 @@ public class CiudadRepoImpl implements ICiudadRepo {
 		miQuery.setParameter("valor", nombre);
 		Ciudad miCiudad = (Ciudad) miQuery.getSingleResult();
 		return miCiudad;
+	}
+
+	@Override
+	public Ciudad buscarCiudadPorNombreType(String nombre) {
+		TypedQuery<Ciudad> myTypedQuery = (TypedQuery<Ciudad>) this.entityManager
+				.createQuery("select c from Ciudad c where c.nombre =:valor");
+		myTypedQuery.setParameter("valor", nombre);
+		return myTypedQuery.getSingleResult();
+	}
+
+	@Override
+	public Ciudad buscarCiudadPorNombreNemed(String nombre) {
+		Query miQuery = this.entityManager.createNamedQuery("Ciudad.buscarPorNombre");
+		miQuery.setParameter("valor", nombre);
+		return (Ciudad) miQuery.getSingleResult();
 	}
 
 }

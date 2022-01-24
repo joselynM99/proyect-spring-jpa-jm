@@ -37,4 +37,14 @@ public class CiudadServiceImpl implements ICiudadService {
 		return this.ciudadRepo.buscarCiudadPorNombre(nombre);
 	}
 
+	@Override
+	public Ciudad buscarCiudadPorNombreType(String nombre) {
+		return this.ciudadRepo.buscarCiudadPorNombreType(nombre);
+	}
+
+	@Override
+	public Ciudad buscarCiudadPorNombreNemed(String nombre) {
+		return this.ciudadRepo.buscarCiudadPorNombreNemed(nombre);
+	}
+
 }
