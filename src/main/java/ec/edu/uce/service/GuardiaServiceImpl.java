@@ -46,10 +46,17 @@ public class GuardiaServiceImpl implements IGuardiaService {
 	public Guardia buscarPorApellidoNamed(String apellido) {
 		return this.guardiaRepo.buscarGuardiasPorApellidoNamed(apellido);
 	}
+	
+	@Override
+	public Guardia buscarPorApellidoNative(String apellido) {
+		return this.guardiaRepo.buscarGuardiasPorApellidoNative(apellido);
+	}
+
 
 	@Override
 	public Guardia buscarListaGuardiasPorApellido(String apellido) {
 		return this.guardiaRepo.buscarListaGuardiasPorApellido(apellido);
 	}
 
+	
 }
