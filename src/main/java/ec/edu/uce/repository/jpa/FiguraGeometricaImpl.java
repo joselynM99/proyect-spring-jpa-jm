@@ -65,4 +65,12 @@ public class FiguraGeometricaImpl implements IFiguraGeometricaRepo {
 		return (FiguraGeometrica) miQuery.getSingleResult();
 	}
 
+	@Override
+	public FiguraGeometrica buscarFiguraPorNombreNative(String nombre) {
+		Query miQuery = this.entityManager.createNativeQuery(
+				"select * from figura_geometrica fg where fg.nombre =:valor", FiguraGeometrica.class);
+		miQuery.setParameter("valor", nombre);
+		return (FiguraGeometrica) miQuery.getSingleResult();
+	}
+
 }

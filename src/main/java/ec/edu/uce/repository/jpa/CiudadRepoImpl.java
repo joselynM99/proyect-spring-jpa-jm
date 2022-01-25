@@ -65,4 +65,12 @@ public class CiudadRepoImpl implements ICiudadRepo {
 		return (Ciudad) miQuery.getSingleResult();
 	}
 
+	@Override
+	public Ciudad buscarCiudadPorNombreNativ(String nombre) {
+		Query miQuery = this.entityManager.createNativeQuery("select * from ciudad c where c.nombre =:valor",
+				Ciudad.class);
+		miQuery.setParameter("valor", nombre);
+		return (Ciudad) miQuery.getSingleResult();
+	}
+
 }

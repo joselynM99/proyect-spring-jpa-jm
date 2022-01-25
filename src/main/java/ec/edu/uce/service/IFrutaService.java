@@ -17,4 +17,7 @@ public interface IFrutaService {
 	Fruta buscarFrutaPorColorTyped(String color);
 
 	Fruta buscarFrutaPorColorNamed(String color);
+	
+	Fruta buscarFrutaPorColorNative(String color);
+
 }

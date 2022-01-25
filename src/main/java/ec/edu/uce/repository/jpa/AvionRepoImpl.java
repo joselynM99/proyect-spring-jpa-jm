@@ -68,4 +68,12 @@ public class AvionRepoImpl implements IAvionRepo {
 
 	}
 
+	@Override
+	public Avion buscarPorModeloNative(String modelo) {
+		Query miQuery = this.entityManager.createNativeQuery("select * from avion a where a.modelo =:valor",
+				Avion.class);
+		miQuery.setParameter("valor", modelo);
+		return (Avion) miQuery.getSingleResult();
+	}
+
 }

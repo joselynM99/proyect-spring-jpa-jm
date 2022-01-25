@@ -17,5 +17,8 @@ public interface IFiguraGeometricaService {
 	FiguraGeometrica buscarFiguraPorNombreType(String nombre);
 
 	FiguraGeometrica buscarFiguraPorNombreNamed(String nombre);
+	
+	FiguraGeometrica buscarFiguraPorNombreNative(String nombre);
+
 
 }

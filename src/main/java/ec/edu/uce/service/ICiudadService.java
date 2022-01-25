@@ -13,9 +13,11 @@ public interface ICiudadService {
 	void borrar(Integer id);
 
 	Ciudad buscarCiudadPorNombre(String nombre);
-	
+
 	Ciudad buscarCiudadPorNombreType(String nombre);
 
 	Ciudad buscarCiudadPorNombreNemed(String nombre);
+
+	Ciudad buscarCiudadPorNombreNativ(String nombre);
 
 }

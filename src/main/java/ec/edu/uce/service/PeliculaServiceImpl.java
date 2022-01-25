@@ -47,4 +47,9 @@ public class PeliculaServiceImpl implements IPeliculaService {
 		return this.peliculaRepo.buscarPeliculaPorDirectorNamed(director);
 	}
 
+	@Override
+	public Pelicula buscarPeliculaPorDirectorNative(String director) {
+		return this.peliculaRepo.buscarPeliculaPorDirectorNative(director);
+	}
+
 }

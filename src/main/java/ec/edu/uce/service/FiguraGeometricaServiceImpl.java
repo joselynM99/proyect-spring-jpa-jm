@@ -47,4 +47,9 @@ public class FiguraGeometricaServiceImpl implements IFiguraGeometricaService {
 		return this.figuraRepo.buscarFiguraPorNombreNamed(nombre);
 	}
 
+	@Override
+	public FiguraGeometrica buscarFiguraPorNombreNative(String nombre) {
+		return this.figuraRepo.buscarFiguraPorNombreNative(nombre);
+	}
+
 }

@@ -65,4 +65,12 @@ public class PeliculaRepoImpl implements IPeliculaRepo {
 		return (Pelicula) miQuery.getSingleResult();
 	}
 
+	@Override
+	public Pelicula buscarPeliculaPorDirectorNative(String director) {
+		Query miQuery = this.entityManager.createNativeQuery("select * from pelicula p where p.director =:valor",
+				Pelicula.class);
+		miQuery.setParameter("valor", director);
+		return (Pelicula) miQuery.getSingleResult();
+	}
+
 }

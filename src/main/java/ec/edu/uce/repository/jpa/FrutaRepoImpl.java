@@ -65,4 +65,12 @@ public class FrutaRepoImpl implements IFrutaRepo {
 		return (Fruta) miQuery.getSingleResult();
 	}
 
+	@Override
+	public Fruta buscarFrutaPorColorNative(String color) {
+		Query miQuery = this.entityManager.createNativeQuery("select * from fruta fr where fr.color =:valor",
+				Fruta.class);
+		miQuery.setParameter("valor", color);
+		return (Fruta) miQuery.getSingleResult();
+	}
+
 }

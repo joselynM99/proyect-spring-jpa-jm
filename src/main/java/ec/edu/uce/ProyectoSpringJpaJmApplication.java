@@ -125,8 +125,25 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 //		System.out.println(gApellido);
 
 		// Busqueda con Named
-		Guardia gApellido = this.guardiaService.buscarPorApellidoNamed("Martines");
+		Guardia gApellido = this.guardiaService.buscarGuardiasPorApellidoNative("Martines");
 		LOG.info("El guardia es: " + gApellido);
+
+//Tarea 13***************************************************************************
+
+		Avion avModeloNative = this.avionService.buscarPorModeloNative("Boeing 737");
+		LOG.info("El avion es: " + avModeloNative);
+
+		Ciudad ciuNombreNative = this.ciudadService.buscarCiudadPorNombreNativ("Los Angeles");
+		LOG.info("La ciudad es: " + ciuNombreNative);
+
+		FiguraGeometrica figNombreNative = this.figuraService.buscarFiguraPorNombreNative("Circulo");
+		LOG.info("La figura es: " + figNombreNative);
+
+		Fruta frColorNative = this.frutaService.buscarFrutaPorColorNative("Amarillo");
+		LOG.info("La fruta es: " + frColorNative);
+
+		Pelicula plDirectorNative = this.peliculaService.buscarPeliculaPorDirectorNative("Joe Wright");
+		LOG.info("La pelicula es: " + plDirectorNative);
 
 //Tarea 12***************************************************************************
 
