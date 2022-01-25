@@ -130,36 +130,36 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 
 //Tarea 12***************************************************************************
 
-		Avion avModeloType = this.avionService.buscarPorModeloType("Boeing 737");
-		LOG.info("El avion es: " + avModeloType);
-
-		Avion avModeloNamed = this.avionService.buscarPorModeloNamed("Boeing 737");
-		LOG.info("El avion es: " + avModeloNamed);
-
-		Ciudad ciuNombreType = this.ciudadService.buscarCiudadPorNombreType("Los Angeles");
-		LOG.info("La ciudad es: " + ciuNombreType);
-
-		Ciudad ciuNombreNamed = this.ciudadService.buscarCiudadPorNombreNemed("Los Angeles");
-		LOG.info("La ciudad es: " + ciuNombreNamed);
-
-		FiguraGeometrica figNombreType = this.figuraService.buscarFiguraPorNombreType("Circulo");
-		LOG.info("La figura es: " + figNombreType);
-
-		FiguraGeometrica figNombreNamed = this.figuraService.buscarFiguraPorNombreNamed("Circulo");
-		LOG.info("La figura es: " + figNombreNamed);
-
-		Fruta frColorTyped = this.frutaService.buscarFrutaPorColorTyped("Amarillo");
-		LOG.info("La fruta es: " + frColorTyped);
-
-		Fruta frColorNamed = this.frutaService.buscarFrutaPorColorNamed("Amarillo");
-		LOG.info("La fruta es: " + frColorNamed);
-		
-
-		Pelicula plDirectorType = this.peliculaService.buscarPeliculaPorDirectorTyped("Joe Wright");
-		LOG.info("La pelicula es: "+plDirectorType);
-		
-		Pelicula plDirectorNamed = this.peliculaService.buscarPeliculaPorDirectorNamed("Joe Wright");
-		LOG.info("La pelicula es: "+plDirectorNamed);
+//		Avion avModeloType = this.avionService.buscarPorModeloType("Boeing 737");
+//		LOG.info("El avion es: " + avModeloType);
+//
+//		Avion avModeloNamed = this.avionService.buscarPorModeloNamed("Boeing 737");
+//		LOG.info("El avion es: " + avModeloNamed);
+//
+//		Ciudad ciuNombreType = this.ciudadService.buscarCiudadPorNombreType("Los Angeles");
+//		LOG.info("La ciudad es: " + ciuNombreType);
+//
+//		Ciudad ciuNombreNamed = this.ciudadService.buscarCiudadPorNombreNemed("Los Angeles");
+//		LOG.info("La ciudad es: " + ciuNombreNamed);
+//
+//		FiguraGeometrica figNombreType = this.figuraService.buscarFiguraPorNombreType("Circulo");
+//		LOG.info("La figura es: " + figNombreType);
+//
+//		FiguraGeometrica figNombreNamed = this.figuraService.buscarFiguraPorNombreNamed("Circulo");
+//		LOG.info("La figura es: " + figNombreNamed);
+//
+//		Fruta frColorTyped = this.frutaService.buscarFrutaPorColorTyped("Amarillo");
+//		LOG.info("La fruta es: " + frColorTyped);
+//
+//		Fruta frColorNamed = this.frutaService.buscarFrutaPorColorNamed("Amarillo");
+//		LOG.info("La fruta es: " + frColorNamed);
+//		
+//
+//		Pelicula plDirectorType = this.peliculaService.buscarPeliculaPorDirectorTyped("Joe Wright");
+//		LOG.info("La pelicula es: "+plDirectorType);
+//		
+//		Pelicula plDirectorNamed = this.peliculaService.buscarPeliculaPorDirectorNamed("Joe Wright");
+//		LOG.info("La pelicula es: "+plDirectorNamed);
 
 //Tarea 11***************************************************************************		
 //		//Avion
