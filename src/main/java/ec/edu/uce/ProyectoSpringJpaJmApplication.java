@@ -1,5 +1,7 @@
 package ec.edu.uce;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -125,25 +127,45 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 //		System.out.println(gApellido);
 
 		// Busqueda con Named
-		Guardia gApellido = this.guardiaService.buscarGuardiasPorApellidoNative("Martines");
-		LOG.info("El guardia es: " + gApellido);
+//		Guardia gApellido = this.guardiaService.buscarGuardiasPorApellidoNative("Martines");
+//		LOG.info("El guardia es: " + gApellido);
 
+//		Guardia gApellido = this.guardiaService.buscarGuardiasPorApellidoNamedNative("Martines");
+//		LOG.info("El guardia es(Named Native): " + gApellido);
+
+		// Criteria API
+//		Guardia gApellido = this.guardiaService.buscarGuardiasPorApellidoCriteriaAPI("Martines");
+//		LOG.info("El guardia es(Criteria API): " + gApellido);
+
+		// Criteria con and
+//		Guardia gApellido = this.guardiaService.buscarGuardiasPorApellidoCriteriaAPIAND("Martines", "Villaflora");
+//		LOG.info("El guardia es(Criteria API AND): " + gApellido);
+
+		// Criteria con or
+//		Guardia gApellido = this.guardiaService.buscarGuardiasPorApellidoCriteriaAPIOR("Martin", "Villaflora");
+//		LOG.info("El guardia es(Criteria API OR): " + gApellido);
+
+		//Or lista
+		List<Guardia> listaGuardia = this.guardiaService.buscarGuardiasPorApellidoCriteriaAPIOR("Martines","Naciones Unidas");
+		for(Guardia g: listaGuardia) {
+			LOG.info("El guardia es: " + g);
+		}
 //Tarea 13***************************************************************************
 
-		Avion avModeloNative = this.avionService.buscarPorModeloNative("Boeing 737");
-		LOG.info("El avion es: " + avModeloNative);
-
-		Ciudad ciuNombreNative = this.ciudadService.buscarCiudadPorNombreNativ("Los Angeles");
-		LOG.info("La ciudad es: " + ciuNombreNative);
-
-		FiguraGeometrica figNombreNative = this.figuraService.buscarFiguraPorNombreNative("Circulo");
-		LOG.info("La figura es: " + figNombreNative);
-
-		Fruta frColorNative = this.frutaService.buscarFrutaPorColorNative("Amarillo");
-		LOG.info("La fruta es: " + frColorNative);
-
-		Pelicula plDirectorNative = this.peliculaService.buscarPeliculaPorDirectorNative("Joe Wright");
-		LOG.info("La pelicula es: " + plDirectorNative);
+//		Avion avModeloNative = this.avionService.buscarPorModeloNative("Boeing 737");
+//		LOG.info("El avion es: " + avModeloNative);
+//
+//		Ciudad ciuNombreNative = this.ciudadService.buscarCiudadPorNombreNativ("Los Angeles");
+//		LOG.info("La ciudad es: " + ciuNombreNative);
+//
+//		FiguraGeometrica figNombreNative = this.figuraService.buscarFiguraPorNombreNative("Circulo");
+//		LOG.info("La figura es: " + figNombreNative);
+//
+//		Fruta frColorNative = this.frutaService.buscarFrutaPorColorNative("Amarillo");
+//		LOG.info("La fruta es: " + frColorNative);
+//
+//		Pelicula plDirectorNative = this.peliculaService.buscarPeliculaPorDirectorNative("Joe Wright");
+//		LOG.info("La pelicula es: " + plDirectorNative);
 
 //Tarea 12***************************************************************************
 
