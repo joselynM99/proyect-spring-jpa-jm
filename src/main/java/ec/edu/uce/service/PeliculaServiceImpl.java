@@ -52,4 +52,14 @@ public class PeliculaServiceImpl implements IPeliculaService {
 		return this.peliculaRepo.buscarPeliculaPorDirectorNative(director);
 	}
 
+	@Override
+	public Pelicula buscarPeliculaPorDirectorNamedNative(String director) {
+		return this.peliculaRepo.buscarPeliculaPorDirectorNamedNative(director);
+	}
+
+	@Override
+	public Pelicula buscarPeliculaPorDirectorCriteriaAPI(String director) {
+		return this.peliculaRepo.buscarPeliculaPorDirectorCriteriaAPI(director);
+	}
+
 }

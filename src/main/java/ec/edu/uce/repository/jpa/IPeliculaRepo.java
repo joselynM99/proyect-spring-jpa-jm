@@ -11,13 +11,17 @@ public interface IPeliculaRepo {
 	Pelicula buscarPeliculaPorID(Integer id);
 
 	void borrarPeliculaPorId(Integer id);
-	
+
 	Pelicula buscarPeliculaPorDirector(String director);
-	
+
 	Pelicula buscarPeliculaPorDirectorTyped(String director);
-	
+
 	Pelicula buscarPeliculaPorDirectorNamed(String director);
-	
+
 	Pelicula buscarPeliculaPorDirectorNative(String director);
+
+	Pelicula buscarPeliculaPorDirectorNamedNative(String director);
+
+	Pelicula buscarPeliculaPorDirectorCriteriaAPI(String director);
 
 }

@@ -4,12 +4,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
 import ec.edu.uce.modelo.jpa.Avion;
-import ec.edu.uce.modelo.jpa.Guardia;
 
 @Repository
 @Transactional
@@ -74,6 +77,36 @@ public class AvionRepoImpl implements IAvionRepo {
 				Avion.class);
 		miQuery.setParameter("valor", modelo);
 		return (Avion) miQuery.getSingleResult();
+	}
+
+	@Override
+	public Avion buscarPorModeloNamedNative(String modelo) {
+		Query miQuery = this.entityManager.createNamedQuery("Avion.buscarPorModeloNative", Avion.class);
+		miQuery.setParameter("valor", modelo);
+		return (Avion) miQuery.getSingleResult();
+	}
+
+	@Override
+	public Avion buscarPorModeloCriterialAPI(String modelo) {
+		// Se le dice a entityMAnager cómo trabajar, con qué tipo
+		CriteriaBuilder myCriteria = this.entityManager.getCriteriaBuilder();
+
+		// Creando un Query que retorna un guardia, especificar el tipo de retorno
+		CriteriaQuery<Avion> myQuery = myCriteria.createQuery(Avion.class);
+
+		// Se empieza a construir el SQL
+		Root<Avion> myTable = myQuery.from(Avion.class);
+
+		// Crear los where, que en criteria API se los conoce como Predicados
+		Predicate p1 = myCriteria.equal(myTable.get("modelo"), modelo);
+		// Predicate p2= myCriteria.equal(myTable.get("apellido"), apellido);
+
+		// Empezamos a conformar el select
+		myQuery.select(myTable).where(p1);// por defecto usa AND
+
+		TypedQuery<Avion> typedQuery = this.entityManager.createQuery(myQuery);
+
+		return typedQuery.getSingleResult();
 	}
 
 }

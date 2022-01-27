@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -12,26 +13,26 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "pelicula")
 @NamedQuery(name = "Pelicula.buscarPorDirector", query = "select p from Pelicula p where p.director =:valor")
+@NamedNativeQuery(name = "Pelicula.buscarPorDirectorNative", query = "select * from pelicula p where p.director =:valor", resultClass = Pelicula.class)
 public class Pelicula {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_pelicula")
 	@SequenceGenerator(name = "seq_pelicula", sequenceName = "seq_pelicula", allocationSize = 1)
-	
+
 	@Column(name = "id")
 	private Integer id;
-	
+
 	@Column(name = "titulo")
 	private String titulo;
-	
+
 	@Column(name = "director")
 	private String director;
-	
+
 	@Column(name = "productor")
 	private String productor;
 
-	
-	//Metodos set y get
+	// Metodos set y get
 	public Integer getId() {
 		return id;
 	}
@@ -69,8 +70,5 @@ public class Pelicula {
 		return "Pelicula [id=" + id + ", titulo=" + titulo + ", director=" + director + ", productor=" + productor
 				+ "]";
 	}
-	
-	
-	
 
 }

@@ -6,7 +6,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import ec.edu.uce.modelo.Animal;
-import ec.edu.uce.modelo.Paciente;
 
 @Repository
 public class AnimalRepoImpl implements IAnimalRepo {

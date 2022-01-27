@@ -146,10 +146,46 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 //		LOG.info("El guardia es(Criteria API OR): " + gApellido);
 
 		//Or lista
-		List<Guardia> listaGuardia = this.guardiaService.buscarGuardiasPorApellidoCriteriaAPIOR("Martines","Naciones Unidas");
-		for(Guardia g: listaGuardia) {
-			LOG.info("El guardia es: " + g);
-		}
+//		List<Guardia> listaGuardia = this.guardiaService.buscarGuardiasPorApellidoCriteriaAPIOR("Martines","Naciones Unidas");
+//		for(Guardia g: listaGuardia) {
+//			LOG.info("El guardia es: " + g);
+//		}
+		
+//Tarea 14**********************************************************************************
+		
+		//Named Native
+		Avion avModeloNamedNative = this.avionService.buscarPorModeloNamedNative("Boeing 737");
+		LOG.info("El avion es: " + avModeloNamedNative);
+
+		Ciudad ciuNombreNamedNative = this.ciudadService.buscarCiudadPorNombreNamedNative("Los Angeles");
+		LOG.info("La ciudad es: " + ciuNombreNamedNative);
+
+		FiguraGeometrica figNombreNamedNative = this.figuraService.buscarFiguraPorNombreNamedNative("Circulo");
+		LOG.info("La figura es: " + figNombreNamedNative);
+
+		Fruta frColorNamedNative = this.frutaService.buscarFrutaPorColorNamedNative("Amarillo");
+		LOG.info("La fruta es: " + frColorNamedNative);
+
+		Pelicula plDirectorNamedNative = this.peliculaService.buscarPeliculaPorDirectorNamedNative("Joe Wright");
+		LOG.info("La pelicula es: " + plDirectorNamedNative);
+		
+		
+		//Criteria API		
+		Avion avModeloCriteria = this.avionService.buscarPorModeloNamedNative("Boeing 737");
+		LOG.info("El avion es: " + avModeloCriteria);
+
+		Ciudad ciuNombreCriteria = this.ciudadService.buscarCiudadPorNombreNamedNative("Los Angeles");
+		LOG.info("La ciudad es: " + ciuNombreCriteria);
+
+		FiguraGeometrica figNombreCriteria = this.figuraService.buscarFiguraPorNombreNamedNative("Circulo");
+		LOG.info("La figura es: " + figNombreCriteria);
+
+		Fruta frColorNamedCriteria = this.frutaService.buscarFrutaPorColorNamedNative("Amarillo");
+		LOG.info("La fruta es: " + frColorNamedCriteria);
+
+		Pelicula plDirectorNamedCriteria = this.peliculaService.buscarPeliculaPorDirectorNamedNative("Joe Wright");
+		LOG.info("La pelicula es: " + plDirectorNamedCriteria);
+		
 //Tarea 13***************************************************************************
 
 //		Avion avModeloNative = this.avionService.buscarPorModeloNative("Boeing 737");

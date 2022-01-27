@@ -18,6 +18,10 @@ public interface IFrutaRepo {
 	Fruta buscarFrutaPorColorNamed(String color);
 	
 	Fruta buscarFrutaPorColorNative(String color);
+	
+	Fruta buscarFrutaPorColorNamedNative(String color);
+	
+	Fruta buscarFrutaPorColorCriteriaAPI(String color);
 
 
 }

@@ -4,6 +4,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -71,6 +75,30 @@ public class FrutaRepoImpl implements IFrutaRepo {
 				Fruta.class);
 		miQuery.setParameter("valor", color);
 		return (Fruta) miQuery.getSingleResult();
+	}
+
+	@Override
+	public Fruta buscarFrutaPorColorNamedNative(String color) {
+		Query miQuery = this.entityManager.createNamedQuery("Fruta.buscarPorColorNative", Fruta.class);
+		miQuery.setParameter("valor", color);
+		return (Fruta) miQuery.getSingleResult();
+	}
+
+	@Override
+	public Fruta buscarFrutaPorColorCriteriaAPI(String color) {
+		CriteriaBuilder myCriteria = this.entityManager.getCriteriaBuilder();
+
+		CriteriaQuery<Fruta> myQuery = myCriteria.createQuery(Fruta.class);
+		
+		Root<Fruta> myTable = myQuery.from(Fruta.class);
+		
+		Predicate p1 = myCriteria.equal(myTable.get("color"), color);
+		
+		myQuery.select(myTable).where(p1);
+		
+		TypedQuery<Fruta> typedQuery = this.entityManager.createQuery(myQuery);
+		
+		return typedQuery.getSingleResult();
 	}
 
 }

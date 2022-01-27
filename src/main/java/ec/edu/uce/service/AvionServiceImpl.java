@@ -52,4 +52,14 @@ public class AvionServiceImpl implements IAvionService {
 		return this.avionRepo.buscarPorModeloNative(modelo);
 	}
 
+	@Override
+	public Avion buscarPorModeloNamedNative(String modelo) {
+		return this.avionRepo.buscarPorModeloNamedNative(modelo);
+	}
+
+	@Override
+	public Avion buscarPorModeloCriterialAPI(String modelo) {
+		return this.avionRepo.buscarPorModeloCriterialAPI(modelo);
+	}
+
 }

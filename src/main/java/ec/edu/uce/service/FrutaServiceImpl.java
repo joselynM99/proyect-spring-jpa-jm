@@ -53,4 +53,14 @@ public class FrutaServiceImpl implements IFrutaService {
 		return this.frutaRepo.buscarFrutaPorColorNative(color);
 	}
 
+	@Override
+	public Fruta buscarFrutaPorColorNamedNative(String color) {
+		return this.frutaRepo.buscarFrutaPorColorNamedNative(color);
+	}
+
+	@Override
+	public Fruta buscarFrutaPorColorCriteriaAPI(String color) {
+		return this.frutaRepo.buscarFrutaPorColorCriteriaAPI(color);
+	}
+
 }

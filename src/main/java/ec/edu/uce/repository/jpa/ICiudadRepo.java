@@ -16,7 +16,11 @@ public interface ICiudadRepo {
 	Ciudad buscarCiudadPorNombreType(String nombre);
 
 	Ciudad buscarCiudadPorNombreNemed(String nombre);
-	
+
 	Ciudad buscarCiudadPorNombreNativ(String nombre);
+
+	Ciudad buscarCiudadPorNombreNamedNative(String nombre);
+	
+	Ciudad buscarCiudadPorNombreCriteriaAPI(String nombre);
 
 }

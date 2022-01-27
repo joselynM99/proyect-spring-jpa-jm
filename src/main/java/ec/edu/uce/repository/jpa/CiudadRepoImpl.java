@@ -4,6 +4,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -71,6 +75,31 @@ public class CiudadRepoImpl implements ICiudadRepo {
 				Ciudad.class);
 		miQuery.setParameter("valor", nombre);
 		return (Ciudad) miQuery.getSingleResult();
+	}
+
+	@Override
+	public Ciudad buscarCiudadPorNombreNamedNative(String nombre) {
+		Query miQuery = this.entityManager.createNamedQuery("Ciudad.buscarPorNombreNative", Ciudad.class);
+		miQuery.setParameter("valor", nombre);
+		return (Ciudad) miQuery.getSingleResult();
+	}
+
+	@Override
+	public Ciudad buscarCiudadPorNombreCriteriaAPI(String nombre) {
+		CriteriaBuilder myCriteria = this.entityManager.getCriteriaBuilder();
+		
+		CriteriaQuery<Ciudad> myQuery = myCriteria.createQuery(Ciudad.class);
+		
+		Root<Ciudad> myTable = myQuery.from(Ciudad.class);
+		
+		Predicate p1 = myCriteria.equal(myTable.get("nombre"), nombre);
+		
+		myQuery.select(myTable).where(p1);
+		
+		TypedQuery<Ciudad> typedQuery = this.entityManager.createQuery(myQuery);
+		
+		return typedQuery.getSingleResult();
+		
 	}
 
 }

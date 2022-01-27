@@ -4,6 +4,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -71,6 +75,32 @@ public class FiguraGeometricaImpl implements IFiguraGeometricaRepo {
 				"select * from figura_geometrica fg where fg.nombre =:valor", FiguraGeometrica.class);
 		miQuery.setParameter("valor", nombre);
 		return (FiguraGeometrica) miQuery.getSingleResult();
+	}
+
+	@Override
+	public FiguraGeometrica buscarFiguraPorNombreNamedNative(String nombre) {
+		Query miQuery = this.entityManager.createNamedQuery("FiguraGeometrica.buscarPorNombreNative",
+				FiguraGeometrica.class);
+		miQuery.setParameter("valor", nombre);
+		return (FiguraGeometrica) miQuery.getSingleResult();
+	}
+
+	@Override
+	public FiguraGeometrica buscarFiguraPorNombreCriteriaAPI(String nombre) {
+		CriteriaBuilder myCriteria = this.entityManager.getCriteriaBuilder();
+
+		CriteriaQuery<FiguraGeometrica> myQuery = myCriteria.createQuery(FiguraGeometrica.class);
+		
+		Root<FiguraGeometrica> myTable = myQuery.from(FiguraGeometrica.class);
+		
+		Predicate p1 = myCriteria.equal(myTable.get("nombre"), nombre);
+		
+		myQuery.select(myTable).where(p1);
+		
+		TypedQuery<FiguraGeometrica> typedQuery = this.entityManager.createQuery(myQuery);
+		
+		return typedQuery.getSingleResult();
+		
 	}
 
 }

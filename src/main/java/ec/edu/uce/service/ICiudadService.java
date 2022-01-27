@@ -20,4 +20,8 @@ public interface ICiudadService {
 
 	Ciudad buscarCiudadPorNombreNativ(String nombre);
 
+	Ciudad buscarCiudadPorNombreNamedNative(String nombre);
+
+	Ciudad buscarCiudadPorNombreCriteriaAPI(String nombre);
+
 }

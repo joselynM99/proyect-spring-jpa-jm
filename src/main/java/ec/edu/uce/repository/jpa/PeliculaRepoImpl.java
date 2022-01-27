@@ -4,6 +4,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -71,6 +75,31 @@ public class PeliculaRepoImpl implements IPeliculaRepo {
 				Pelicula.class);
 		miQuery.setParameter("valor", director);
 		return (Pelicula) miQuery.getSingleResult();
+	}
+
+	@Override
+	public Pelicula buscarPeliculaPorDirectorNamedNative(String director) {
+		Query miQuery = this.entityManager.createNamedQuery("Pelicula.buscarPorDirectorNative", Pelicula.class);
+		miQuery.setParameter("valor", director);
+		return (Pelicula) miQuery.getSingleResult();
+
+	}
+
+	@Override
+	public Pelicula buscarPeliculaPorDirectorCriteriaAPI(String director) {
+		CriteriaBuilder myCriteria = this.entityManager.getCriteriaBuilder();
+
+		CriteriaQuery<Pelicula> myQuery = myCriteria.createQuery(Pelicula.class);
+		
+		Root<Pelicula> myTable = myQuery.from(Pelicula.class);
+		
+		Predicate p1 = myCriteria.equal(myTable.get("director"), director);
+		
+		myQuery.select(myTable).where(p1);
+		
+		TypedQuery<Pelicula> typedQuery = this.entityManager.createQuery(myQuery);
+		
+		return typedQuery.getSingleResult();
 	}
 
 }

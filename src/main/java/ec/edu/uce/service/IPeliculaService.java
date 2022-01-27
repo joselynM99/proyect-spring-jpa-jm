@@ -19,5 +19,9 @@ public interface IPeliculaService {
 	Pelicula buscarPeliculaPorDirectorNamed(String director);
 	
 	Pelicula buscarPeliculaPorDirectorNative(String director);
+	
+	Pelicula buscarPeliculaPorDirectorNamedNative(String director);
+	
+	Pelicula buscarPeliculaPorDirectorCriteriaAPI(String director);
 
 }
