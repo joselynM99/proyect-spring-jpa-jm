@@ -171,19 +171,19 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 		
 		
 		//Criteria API		
-		Avion avModeloCriteria = this.avionService.buscarPorModeloNamedNative("Boeing 737");
+		Avion avModeloCriteria = this.avionService.buscarPorModeloCriterialAPI("Boeing 737");
 		LOG.info("El avion es: " + avModeloCriteria);
 
-		Ciudad ciuNombreCriteria = this.ciudadService.buscarCiudadPorNombreNamedNative("Los Angeles");
+		Ciudad ciuNombreCriteria = this.ciudadService.buscarCiudadPorNombreCriteriaAPI("Los Angeles");
 		LOG.info("La ciudad es: " + ciuNombreCriteria);
 
-		FiguraGeometrica figNombreCriteria = this.figuraService.buscarFiguraPorNombreNamedNative("Circulo");
+		FiguraGeometrica figNombreCriteria = this.figuraService.buscarFiguraPorNombreCriteriaAPI("Circulo");
 		LOG.info("La figura es: " + figNombreCriteria);
 
-		Fruta frColorNamedCriteria = this.frutaService.buscarFrutaPorColorNamedNative("Amarillo");
+		Fruta frColorNamedCriteria = this.frutaService.buscarFrutaPorColorCriteriaAPI("Amarillo");
 		LOG.info("La fruta es: " + frColorNamedCriteria);
 
-		Pelicula plDirectorNamedCriteria = this.peliculaService.buscarPeliculaPorDirectorNamedNative("Joe Wright");
+		Pelicula plDirectorNamedCriteria = this.peliculaService.buscarPeliculaPorDirectorCriteriaAPI("Joe Wright");
 		LOG.info("La pelicula es: " + plDirectorNamedCriteria);
 		
 //Tarea 13***************************************************************************
