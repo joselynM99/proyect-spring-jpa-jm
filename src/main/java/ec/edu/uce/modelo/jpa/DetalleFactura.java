@@ -17,8 +17,8 @@ import javax.persistence.Table;
 public class DetalleFactura {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_factura")
-	@SequenceGenerator(name = "seq_factura", sequenceName = "seq_factura", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_detfac")
+	@SequenceGenerator(name = "seq_detfac", sequenceName = "seq_detfac", allocationSize = 1)
 	@Column(name = "defa_id")
 	private Integer id;
 

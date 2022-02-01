@@ -19,8 +19,8 @@ import org.hibernate.annotations.Cascade;
 @Table(name = "factura")
 public class Factura {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_detalle")
-	@SequenceGenerator(name = "seq_detalle", sequenceName = "seq_detalle", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_fac")
+	@SequenceGenerator(name = "seq_fac", sequenceName = "seq_fac", allocationSize = 1)
 	@Column(name = "fact_id")
 	private Integer id;
 

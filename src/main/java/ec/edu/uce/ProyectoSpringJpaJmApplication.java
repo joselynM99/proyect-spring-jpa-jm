@@ -1,6 +1,5 @@
 package ec.edu.uce;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
@@ -13,9 +12,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import ec.edu.uce.modelo.jpa.DetalleFactura;
-import ec.edu.uce.modelo.jpa.Factura;
-import ec.edu.uce.modelo.jpa.Guardia;
+import ec.edu.uce.modelo.jpa.DetalleReceta;
+import ec.edu.uce.modelo.jpa.Receta;
 import ec.edu.uce.service.IAnimalService;
 import ec.edu.uce.service.IAvionService;
 import ec.edu.uce.service.ICancionService;
@@ -26,12 +24,12 @@ import ec.edu.uce.service.IEstudienteService;
 import ec.edu.uce.service.IFacturaService;
 import ec.edu.uce.service.IFiguraGeometricaService;
 import ec.edu.uce.service.IFrutaService;
-import ec.edu.uce.service.IGestorCitaService;
 import ec.edu.uce.service.IGuardiaService;
 import ec.edu.uce.service.ILibroService;
 import ec.edu.uce.service.IPacienteService;
 import ec.edu.uce.service.IPeliculaService;
 import ec.edu.uce.service.IProfesorService;
+import ec.edu.uce.service.IRecetaService;
 import ec.edu.uce.service.ITiendaService;
 import ec.edu.uce.service.IUniversidadService;
 import ec.edu.uce.service.IVehiculoService;
@@ -75,9 +73,6 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 	private IPacienteService pacienteService;
 
 	@Autowired
-	private IGestorCitaService gestorCitaService;
-
-	@Autowired
 	private IGuardiaService guardiaService;
 
 	@Autowired
@@ -98,12 +93,43 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 	@Autowired
 	private IFacturaService facService;
 
+	@Autowired
+	private IRecetaService recetaService;
+
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoSpringJpaJmApplication.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
+
+		Receta miReceta = new Receta();
+		miReceta.setCedula("12364895");
+		LocalDateTime miFecha = LocalDateTime.of(2022, Month.NOVEMBER, 6, 10, 45);
+		miReceta.setFecha(miFecha);
+		miReceta.setClinica("Jerusalen");
+
+		// detalles
+
+		List<DetalleReceta> detalles = new ArrayList<DetalleReceta>();
+		DetalleReceta d1 = new DetalleReceta();
+		d1.setCantidad(12);
+		d1.setIndicaciones("Una tableta diaria");
+		d1.setNombre("Omeprasol");
+		d1.setReceta(miReceta);
+
+		DetalleReceta d2 = new DetalleReceta();
+		d2.setCantidad(24);
+		d2.setIndicaciones("Dos tabletas diarias");
+		d2.setNombre("Concor");
+		d2.setReceta(miReceta);
+
+		detalles.add(d1);
+		detalles.add(d2);
+
+		miReceta.setDetalles(detalles);
+
+		this.recetaService.guardarReceta(miReceta);
 
 //		Guardia g1= new Guardia();
 //		g1.setNombre("Lucas");
@@ -156,36 +182,36 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 //			LOG.info("El guardia es: " + g);
 //		}
 
-		Factura miFactura = new Factura();
-		miFactura.setCedula("15454");
-		
-		LocalDateTime miFecha = LocalDateTime.of(2021, Month.AUGUST, 8, 12, 45);
-
-		miFactura.setFecha(miFecha);
-		miFactura.setNumero("545-512");
-
-		// Lista de detales
-
-		List<DetalleFactura> detalles = new ArrayList<DetalleFactura>();
-		// detalle 1
-		DetalleFactura d1 = new DetalleFactura();
-		d1.setCantidad(2);
-		d1.setPrecio(new BigDecimal(2.78));
-		d1.setFactura(miFactura);
-
-		detalles.add(d1);
-		// detalle 2
-		DetalleFactura d2 = new DetalleFactura();
-		d2.setCantidad(10);
-		d2.setPrecio(new BigDecimal(5.26));
-		d2.setFactura(miFactura);
-
-		detalles.add(d1);
-		detalles.add(d2);
-
-		miFactura.setDetalles(detalles);
-
-		this.facService.guardarFactura(miFactura);
+//		Factura miFactura = new Factura();
+//		miFactura.setCedula("15454");
+//		
+//		LocalDateTime miFecha = LocalDateTime.of(2021, Month.AUGUST, 8, 12, 45);
+//
+//		miFactura.setFecha(miFecha);
+//		miFactura.setNumero("545-512");
+//
+//		// Lista de detales
+//
+//		List<DetalleFactura> detalles = new ArrayList<DetalleFactura>();
+//		// detalle 1
+//		DetalleFactura d1 = new DetalleFactura();
+//		d1.setCantidad(2);
+//		d1.setPrecio(new BigDecimal(2.78));
+//		d1.setFactura(miFactura);
+//
+//		detalles.add(d1);
+//		// detalle 2
+//		DetalleFactura d2 = new DetalleFactura();
+//		d2.setCantidad(10);
+//		d2.setPrecio(new BigDecimal(5.26));
+//		d2.setFactura(miFactura);
+//
+//		detalles.add(d1);
+//		detalles.add(d2);
+//
+//		miFactura.setDetalles(detalles);
+//
+//		this.facService.guardarFactura(miFactura);
 
 	}
 
