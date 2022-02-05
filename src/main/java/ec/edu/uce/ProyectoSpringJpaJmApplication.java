@@ -1,5 +1,6 @@
 package ec.edu.uce;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
@@ -12,7 +13,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import ec.edu.uce.modelo.jpa.Ciudadano;
 import ec.edu.uce.modelo.jpa.DetalleReceta;
+import ec.edu.uce.modelo.jpa.Empleado;
 import ec.edu.uce.modelo.jpa.Receta;
 import ec.edu.uce.service.IAnimalService;
 import ec.edu.uce.service.IAvionService;
@@ -20,6 +23,7 @@ import ec.edu.uce.service.ICancionService;
 import ec.edu.uce.service.ICasaService;
 import ec.edu.uce.service.ICiudadService;
 import ec.edu.uce.service.ICuentaService;
+import ec.edu.uce.service.IEmpleadoService;
 import ec.edu.uce.service.IEstudienteService;
 import ec.edu.uce.service.IFacturaService;
 import ec.edu.uce.service.IFiguraGeometricaService;
@@ -95,6 +99,9 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 
 	@Autowired
 	private IRecetaService recetaService;
+	
+	@Autowired
+	private IEmpleadoService empleadoService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoSpringJpaJmApplication.class, args);
@@ -102,34 +109,47 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		
+		Empleado em = new Empleado();
+		em.setIess("ahhads4");
+		em.setSalario(new BigDecimal(600));
+		
+		Ciudadano ciu = new Ciudadano();
+		ciu.setNombre("Joselyn");
+		ciu.setApellido("Moncayo");
+		ciu.setEmpleado(em);
+		
+		em.setCiudadano(ciu);
+		
+		this.empleadoService.guardarEmpleado(em);
 
-		Receta miReceta = new Receta();
-		miReceta.setCedula("12364895");
-		LocalDateTime miFecha = LocalDateTime.of(2022, Month.NOVEMBER, 6, 10, 45);
-		miReceta.setFecha(miFecha);
-		miReceta.setClinica("Jerusalen");
-
-		// detalles
-
-		List<DetalleReceta> detalles = new ArrayList<DetalleReceta>();
-		DetalleReceta d1 = new DetalleReceta();
-		d1.setCantidad(12);
-		d1.setIndicaciones("Una tableta diaria");
-		d1.setNombre("Omeprasol");
-		d1.setReceta(miReceta);
-
-		DetalleReceta d2 = new DetalleReceta();
-		d2.setCantidad(24);
-		d2.setIndicaciones("Dos tabletas diarias");
-		d2.setNombre("Concor");
-		d2.setReceta(miReceta);
-
-		detalles.add(d1);
-		detalles.add(d2);
-
-		miReceta.setDetalles(detalles);
-
-		this.recetaService.guardarReceta(miReceta);
+//		Receta miReceta = new Receta();
+//		miReceta.setCedula("12364895");
+//		LocalDateTime miFecha = LocalDateTime.of(2022, Month.NOVEMBER, 6, 10, 45);
+//		miReceta.setFecha(miFecha);
+//		miReceta.setClinica("Jerusalen");
+//
+//		// detalles
+//
+//		List<DetalleReceta> detalles = new ArrayList<DetalleReceta>();
+//		DetalleReceta d1 = new DetalleReceta();
+//		d1.setCantidad(12);
+//		d1.setIndicaciones("Una tableta diaria");
+//		d1.setNombre("Omeprasol");
+//		d1.setReceta(miReceta);
+//
+//		DetalleReceta d2 = new DetalleReceta();
+//		d2.setCantidad(24);
+//		d2.setIndicaciones("Dos tabletas diarias");
+//		d2.setNombre("Concor");
+//		d2.setReceta(miReceta);
+//
+//		detalles.add(d1);
+//		detalles.add(d2);
+//
+//		miReceta.setDetalles(detalles);
+//
+//		this.recetaService.guardarReceta(miReceta);
 
 //		Guardia g1= new Guardia();
 //		g1.setNombre("Lucas");
