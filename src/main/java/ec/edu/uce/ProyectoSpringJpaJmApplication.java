@@ -1,11 +1,5 @@
 package ec.edu.uce;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.time.Month;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +7,15 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import ec.edu.uce.modelo.jpa.Ciudadano;
-import ec.edu.uce.modelo.jpa.DetalleReceta;
-import ec.edu.uce.modelo.jpa.Empleado;
-import ec.edu.uce.modelo.jpa.Receta;
+import ec.edu.uce.modelo.jpa.Capital;
+import ec.edu.uce.modelo.jpa.Pais;
+import ec.edu.uce.modelo.jpa.Presidente;
+import ec.edu.uce.modelo.jpa.Provincia;
+import ec.edu.uce.repository.jpa.IPresidenteRepo;
 import ec.edu.uce.service.IAnimalService;
 import ec.edu.uce.service.IAvionService;
 import ec.edu.uce.service.ICancionService;
+import ec.edu.uce.service.ICapitalService;
 import ec.edu.uce.service.ICasaService;
 import ec.edu.uce.service.ICiudadService;
 import ec.edu.uce.service.ICuentaService;
@@ -32,6 +28,7 @@ import ec.edu.uce.service.IGuardiaService;
 import ec.edu.uce.service.ILibroService;
 import ec.edu.uce.service.IPacienteService;
 import ec.edu.uce.service.IPeliculaService;
+import ec.edu.uce.service.IPresidenteService;
 import ec.edu.uce.service.IProfesorService;
 import ec.edu.uce.service.IRecetaService;
 import ec.edu.uce.service.ITiendaService;
@@ -102,6 +99,12 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 	
 	@Autowired
 	private IEmpleadoService empleadoService;
+	
+	@Autowired
+	private ICapitalService capitalService;
+	
+	@Autowired
+	private IPresidenteService presidenteService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoSpringJpaJmApplication.class, args);
@@ -110,128 +113,48 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Empleado em = new Empleado();
-		em.setIess("ahhads4");
-		em.setSalario(new BigDecimal(600));
+		Capital cap = new Capital();
+		cap.setNombre("Quito");
+		cap.setPoblación(2000000);
 		
-		Ciudadano ciu = new Ciudadano();
-		ciu.setNombre("Joselyn");
-		ciu.setApellido("Moncayo");
-		ciu.setEmpleado(em);
+		Provincia prov = new Provincia();
+		prov.setNombre("Pichincha");
+		prov.setSuperficie(9.536);
+		prov.setCapital(cap);
 		
-		em.setCiudadano(ciu);
+		cap.setProvincia(prov);
 		
-		this.empleadoService.guardarEmpleado(em);
+		this.capitalService.guardarCapital(cap);
 
-//		Receta miReceta = new Receta();
-//		miReceta.setCedula("12364895");
-//		LocalDateTime miFecha = LocalDateTime.of(2022, Month.NOVEMBER, 6, 10, 45);
-//		miReceta.setFecha(miFecha);
-//		miReceta.setClinica("Jerusalen");
-//
-//		// detalles
-//
-//		List<DetalleReceta> detalles = new ArrayList<DetalleReceta>();
-//		DetalleReceta d1 = new DetalleReceta();
-//		d1.setCantidad(12);
-//		d1.setIndicaciones("Una tableta diaria");
-//		d1.setNombre("Omeprasol");
-//		d1.setReceta(miReceta);
-//
-//		DetalleReceta d2 = new DetalleReceta();
-//		d2.setCantidad(24);
-//		d2.setIndicaciones("Dos tabletas diarias");
-//		d2.setNombre("Concor");
-//		d2.setReceta(miReceta);
-//
-//		detalles.add(d1);
-//		detalles.add(d2);
-//
-//		miReceta.setDetalles(detalles);
-//
-//		this.recetaService.guardarReceta(miReceta);
-
-//		Guardia g1= new Guardia();
-//		g1.setNombre("Lucas");
-//		g1.setApellido("Torrez");
-//		g1.setEdificio("Naciones Unidas");
-//		this.guardiaService.guardarGuardia(g1);
+		
+		Presidente pres = new Presidente();
+		pres.setNombre("Guillermo Lasso");
+		pres.setPartidoPolitico("Movimiento CREO");
+		
+		Pais pais = new Pais();
+		pais.setNombre("Ecuador");
+		pais.setContinente("America del Sur");
+		pais.setPresidente(pres);
+		
+		pres.setPais(pais);
+		
+		this.presidenteService.guardarPresidente(pres);
+		
+		
+//		Empleado em = new Empleado();
+//		em.setIess("ahhads4");
+//		em.setSalario(new BigDecimal(600));
 //		
-//		Guardia g2= new Guardia();
-//		g2.setId(3);
-//		g2.setNombre("Lucas");
-//		g2.setApellido("Martines");
-//		g2.setEdificio("Villaflora");
-//		this.guardiaService.actualizar(g2);
-
-		// Guardia g52 =this.guardiaService.buscar(102);
-		// System.out.println(g52);
-
-		// this.guardiaService.borrar(52);
-
-//		Guardia gApellido = this.guardiaService.buscarListaGuardiasPorApellido("Torrez");
+//		Ciudadano ciu = new Ciudadano();
+//		ciu.setNombre("Joselyn");
+//		ciu.setApellido("Moncayo");
+//		ciu.setEmpleado(em);
 //		
-//		System.out.println(gApellido);
-
-		// busqueda con Typed
-//		Guardia gApellido = this.guardiaService.buscarPorApellidoTyped("Martines");
-//		System.out.println(gApellido);
-
-		// Busqueda con Named
-//		Guardia gApellido = this.guardiaService.buscarGuardiasPorApellidoNative("Martines");
-//		LOG.info("El guardia es: " + gApellido);
-
-//		Guardia gApellido = this.guardiaService.buscarGuardiasPorApellidoNamedNative("Martines");
-//		LOG.info("El guardia es(Named Native): " + gApellido);
-
-		// Criteria API
-//		Guardia gApellido = this.guardiaService.buscarGuardiasPorApellidoCriteriaAPI("Martines");
-//		LOG.info("El guardia es(Criteria API): " + gApellido);
-
-		// Criteria con and
-//		Guardia gApellido = this.guardiaService.buscarGuardiasPorApellidoCriteriaAPIAND("Martines", "Villaflora");
-//		LOG.info("El guardia es(Criteria API AND): " + gApellido);
-
-		// Criteria con or
-//		Guardia gApellido = this.guardiaService.buscarGuardiasPorApellidoCriteriaAPIOR("Martin", "Villaflora");
-//		LOG.info("El guardia es(Criteria API OR): " + gApellido);
-
-		// Or lista
-//		List<Guardia> listaGuardia = this.guardiaService.buscarGuardiasPorApellidoCriteriaAPIOR("Martines","Naciones Unidas");
-//		for(Guardia g: listaGuardia) {
-//			LOG.info("El guardia es: " + g);
-//		}
-
-//		Factura miFactura = new Factura();
-//		miFactura.setCedula("15454");
+//		em.setCiudadano(ciu);
 //		
-//		LocalDateTime miFecha = LocalDateTime.of(2021, Month.AUGUST, 8, 12, 45);
-//
-//		miFactura.setFecha(miFecha);
-//		miFactura.setNumero("545-512");
-//
-//		// Lista de detales
-//
-//		List<DetalleFactura> detalles = new ArrayList<DetalleFactura>();
-//		// detalle 1
-//		DetalleFactura d1 = new DetalleFactura();
-//		d1.setCantidad(2);
-//		d1.setPrecio(new BigDecimal(2.78));
-//		d1.setFactura(miFactura);
-//
-//		detalles.add(d1);
-//		// detalle 2
-//		DetalleFactura d2 = new DetalleFactura();
-//		d2.setCantidad(10);
-//		d2.setPrecio(new BigDecimal(5.26));
-//		d2.setFactura(miFactura);
-//
-//		detalles.add(d1);
-//		detalles.add(d2);
-//
-//		miFactura.setDetalles(detalles);
-//
-//		this.facService.guardarFactura(miFactura);
+//		this.empleadoService.guardarEmpleado(em);
+
+
 
 	}
 
