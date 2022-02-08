@@ -1,5 +1,9 @@
 package ec.edu.uce;
 
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,11 +11,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import ec.edu.uce.modelo.jpa.Capital;
-import ec.edu.uce.modelo.jpa.Pais;
-import ec.edu.uce.modelo.jpa.Presidente;
-import ec.edu.uce.modelo.jpa.Provincia;
-import ec.edu.uce.repository.jpa.IPresidenteRepo;
+import ec.edu.uce.modelo.jpa.Factura;
 import ec.edu.uce.service.IAnimalService;
 import ec.edu.uce.service.IAvionService;
 import ec.edu.uce.service.ICancionService;
@@ -113,47 +113,27 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Capital cap = new Capital();
-		cap.setNombre("Quito");
-		cap.setPoblación(2000000);
-		
-		Provincia prov = new Provincia();
-		prov.setNombre("Pichincha");
-		prov.setSuperficie(9.536);
-		prov.setCapital(cap);
-		
-		cap.setProvincia(prov);
-		
-		this.capitalService.guardarCapital(cap);
-
-		
-		Presidente pres = new Presidente();
-		pres.setNombre("Guillermo Lasso");
-		pres.setPartidoPolitico("Movimiento CREO");
-		
-		Pais pais = new Pais();
-		pais.setNombre("Ecuador");
-		pais.setContinente("America del Sur");
-		pais.setPresidente(pres);
-		
-		pres.setPais(pais);
-		
-		this.presidenteService.guardarPresidente(pres);
+		LocalDateTime fecha = LocalDateTime.of(2021, Month.AUGUST, 8, 10, 30);
 		
 		
-//		Empleado em = new Empleado();
-//		em.setIess("ahhads4");
-//		em.setSalario(new BigDecimal(600));
+//		List<Factura> lista = this.facService.buscarPorFechaJOIN(fecha);
+//		LOG.info("Longitud" + lista.size());
+//		for(Factura f: lista) {
+//			LOG.info(f.toString());
+//		}
 //		
-//		Ciudadano ciu = new Ciudadano();
-//		ciu.setNombre("Joselyn");
-//		ciu.setApellido("Moncayo");
-//		ciu.setEmpleado(em);
-//		
-//		em.setCiudadano(ciu);
-//		
-//		this.empleadoService.guardarEmpleado(em);
-
+		List<Factura> lista = this.facService.buscarPorFechaWHERE(fecha);
+		LOG.info("Longitud" + lista.size());
+		for(Factura f: lista) {
+			LOG.info(f.toString());
+		}
+		
+//		List<Factura> lista2 = this.facService.buscarPorFechaLEFTJOIN(fecha);
+//		for(Factura f: lista2) {
+//			LOG.info("La factura es: " + f);
+//		}
+		
+		
 
 
 	}

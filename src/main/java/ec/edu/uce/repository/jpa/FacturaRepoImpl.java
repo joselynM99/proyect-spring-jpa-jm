@@ -1,16 +1,26 @@
 package ec.edu.uce.repository.jpa;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import ec.edu.uce.ProyectoSpringJpaJmApplication;
 import ec.edu.uce.modelo.jpa.Factura;
 
 @Repository
 @Transactional
 public class FacturaRepoImpl implements IFacturaRepo {
+
+	private static final Logger LOG = LoggerFactory.getLogger(FacturaRepoImpl.class);
+
 	@PersistenceContext
 	private EntityManager entityManager;
 
@@ -18,6 +28,45 @@ public class FacturaRepoImpl implements IFacturaRepo {
 	public void insertarFactura(Factura factura) {
 		this.entityManager.persist(factura);
 
+	}
+
+	@Override
+	public List<Factura> buscarPorFechaJOIN(LocalDateTime fecha) {
+		TypedQuery<Factura> myQuery = this.entityManager
+				.createQuery("SELECT f FROM Factura f JOIN f.detalles d WHERE f.fecha <=: fecha", Factura.class);
+		myQuery.setParameter("fecha", fecha);
+
+		List<Factura> lista = myQuery.getResultList();
+		LOG.info("Longitud" + lista.size());
+		for (Factura f : lista) {
+			LOG.info("detalles: " +f.getDetalles()); //Bajo demanda
+			LOG.info(f.toString());
+		}
+		return lista;
+	}
+
+	@Override
+	public List<Factura> buscarPorFechaLEFTJOIN(LocalDateTime fecha) {
+		TypedQuery<Factura> myQuery = this.entityManager
+				.createQuery("SELECT f FROM Factura f LEFT JOIN f.detalles d WHERE f.fecha <=: fecha", Factura.class);
+		myQuery.setParameter("fecha", fecha);
+
+		return myQuery.getResultList();
+	}
+
+	@Override
+	public List<Factura> buscarPorFechaWHERE(LocalDateTime fecha) {
+		TypedQuery<Factura> myQuery = this.entityManager
+				.createQuery("SELECT f FROM Factura f, DetalleFactura d WHERE f = d.factura AND f.fecha <=:fecha", Factura.class);
+		myQuery.setParameter("fecha", fecha);
+
+		List<Factura> lista = myQuery.getResultList();
+		LOG.info("Longitud REPO" + lista.size());
+		for (Factura f : lista) {
+			LOG.info("detalles: " + f.getDetalles()); // Bajo demanda
+			LOG.info(f.toString());
+		}
+		return lista;
 	}
 
 }

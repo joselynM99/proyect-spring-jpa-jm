@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,10 +33,10 @@ public class Factura {
 
 	@Column(name = "fact_fecha", columnDefinition = "TIMESTAMP")
 	private LocalDateTime fecha;
-	
-	//Relacion de uno a muchos
-	@OneToMany(mappedBy = "factura", cascade = CascadeType.ALL) //sale del atributo de DetalleFactura
-		private List<DetalleFactura> detalles;
+
+	// Relacion de uno a muchos
+	@OneToMany(mappedBy = "factura", cascade = CascadeType.ALL) // sale del atributo de DetalleFactura
+	private List<DetalleFactura> detalles;
 
 	// metodos set y get
 	public Integer getId() {
@@ -83,7 +84,5 @@ public class Factura {
 		return "Factura [id=" + id + ", numero=" + numero + ", cedula=" + cedula + ", fecha=" + fecha + ", detalles="
 				+ detalles + "]";
 	}
-	
-
 
 }

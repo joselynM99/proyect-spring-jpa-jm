@@ -32,7 +32,7 @@ public class DetalleFactura {
 	@JoinColumn(name = "fact_id")
 	private Factura factura;
 
-	//Metodos set y get
+	// Metodos set y get
 	public Integer getId() {
 		return id;
 	}
@@ -67,8 +67,7 @@ public class DetalleFactura {
 
 	@Override
 	public String toString() {
-		return "DetalleFactura [id=" + id + ", cantidad=" + cantidad + ", precio=" + precio + ", factura=" + factura
-				+ "]";
+		return "DetalleFactura [id=" + id + ", cantidad=" + cantidad + ", precio=" + precio + "]";
 	}
 
 }
