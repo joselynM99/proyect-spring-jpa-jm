@@ -1,7 +1,5 @@
 package ec.edu.uce;
 
-import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -11,7 +9,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import ec.edu.uce.modelo.jpa.Factura;
+import ec.edu.uce.modelo.jpa.Capital;
+import ec.edu.uce.modelo.jpa.Provincia;
 import ec.edu.uce.service.IAnimalService;
 import ec.edu.uce.service.IAvionService;
 import ec.edu.uce.service.ICancionService;
@@ -96,13 +95,13 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 
 	@Autowired
 	private IRecetaService recetaService;
-	
+
 	@Autowired
 	private IEmpleadoService empleadoService;
-	
+
 	@Autowired
 	private ICapitalService capitalService;
-	
+
 	@Autowired
 	private IPresidenteService presidenteService;
 
@@ -112,29 +111,49 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+
+		List<Capital> lista = this.capitalService.buscarCapitalPorPoblacionJOIN(990000000);
+		LOG.info("Longitud JOIN: " + lista.size());
+		for (Capital c : lista) {
+			LOG.info(c.toString());
+		}
 		
-		LocalDateTime fecha = LocalDateTime.of(2021, Month.AUGUST, 8, 10, 30);
+		List<Capital> lista2 = this.capitalService.buscarCapitalPorPoblacionLEFTJOIN(990000000);
+		LOG.info("Longitud LEFT JOIN: " + lista2.size());
+		for (Capital c : lista2) {
+			LOG.info(c.toString());
+		}
 		
+		List<Capital> lista3 = this.capitalService.buscarCapitalPorPoblacionRIGHTJOIN(990000000);
+		LOG.info("Longitud RIGHT JOIN: " + lista3.size());
+		for (Capital c : lista3) {
+			LOG.info(c.toString());
+		}
 		
+		List<Capital> lista4 = this.capitalService.buscarCapitalPorPoblacionWHERE(990000000);
+		LOG.info("Longitud WHERE: " + lista4.size());
+		for (Capital c : lista4) {
+			LOG.info(c.toString());
+		}
+
+//		LocalDateTime fecha = LocalDateTime.of(2021, Month.AUGUST, 8, 10, 30);
+
 //		List<Factura> lista = this.facService.buscarPorFechaJOIN(fecha);
 //		LOG.info("Longitud" + lista.size());
 //		for(Factura f: lista) {
 //			LOG.info(f.toString());
 //		}
 //		
-		List<Factura> lista = this.facService.buscarPorFechaWHERE(fecha);
-		LOG.info("Longitud" + lista.size());
-		for(Factura f: lista) {
-			LOG.info(f.toString());
-		}
-		
+//		List<Factura> lista = this.facService.buscarPorFechaWHERE(fecha);
+//		LOG.info("Longitud" + lista.size());
+//		for(Factura f: lista) {
+//			LOG.info(f.toString());
+//		}
+//		
 //		List<Factura> lista2 = this.facService.buscarPorFechaLEFTJOIN(fecha);
 //		for(Factura f: lista2) {
 //			LOG.info("La factura es: " + f);
 //		}
-		
-		
-
 
 	}
 

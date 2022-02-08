@@ -62,4 +62,11 @@ public class Provincia {
 		this.capital = capital;
 	}
 
+	@Override
+	public String toString() {
+		return "Provincia [id=" + id + ", nombre=" + nombre + ", superficie=" + superficie + "]";
+	}
+	
+	
+
 }

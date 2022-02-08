@@ -25,7 +25,7 @@ public class Capital {
 	private String nombre;
 	
 	@Column(name = "capi_poblcacion")
-	private Integer población;
+	private Integer poblacion;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "capi_id_provincia")
@@ -49,11 +49,11 @@ public class Capital {
 	}
 
 	public Integer getPoblación() {
-		return población;
+		return poblacion;
 	}
 
 	public void setPoblación(Integer población) {
-		this.población = población;
+		this.poblacion = población;
 	}
 
 	public Provincia getProvincia() {
@@ -63,7 +63,12 @@ public class Capital {
 	public void setProvincia(Provincia provincia) {
 		this.provincia = provincia;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Capital [id=" + id + ", nombre=" + nombre + ", población=" + poblacion + ", provincia=" + provincia
+				+ "]";
+	}
 	
 	
 
