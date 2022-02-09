@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import ec.edu.uce.ProyectoSpringJpaJmApplication;
 import ec.edu.uce.modelo.jpa.Factura;
+import ec.edu.uce.modelo.jpa.FacturaSencilla;
 
 @Repository
 @Transactional
@@ -39,7 +40,7 @@ public class FacturaRepoImpl implements IFacturaRepo {
 		List<Factura> lista = myQuery.getResultList();
 		LOG.info("Longitud" + lista.size());
 		for (Factura f : lista) {
-			LOG.info("detalles: " +f.getDetalles()); //Bajo demanda
+			LOG.info("detalles: " + f.getDetalles()); // Bajo demanda
 			LOG.info(f.toString());
 		}
 		return lista;
@@ -56,8 +57,8 @@ public class FacturaRepoImpl implements IFacturaRepo {
 
 	@Override
 	public List<Factura> buscarPorFechaWHERE(LocalDateTime fecha) {
-		TypedQuery<Factura> myQuery = this.entityManager
-				.createQuery("SELECT f FROM Factura f, DetalleFactura d WHERE f = d.factura AND f.fecha <=:fecha", Factura.class);
+		TypedQuery<Factura> myQuery = this.entityManager.createQuery(
+				"SELECT f FROM Factura f, DetalleFactura d WHERE f = d.factura AND f.fecha <=:fecha", Factura.class);
 		myQuery.setParameter("fecha", fecha);
 
 		List<Factura> lista = myQuery.getResultList();
@@ -67,6 +68,26 @@ public class FacturaRepoImpl implements IFacturaRepo {
 			LOG.info(f.toString());
 		}
 		return lista;
+	}
+
+	@Override
+	public List<Factura> buscarPorFechaJOINFetch(LocalDateTime fecha) {
+		TypedQuery<Factura> myQuery = this.entityManager
+				.createQuery("SELECT f FROM Factura f JOIN FETCH f.detalles d WHERE f.fecha <=: fecha", Factura.class);
+		myQuery.setParameter("fecha", fecha);
+
+		return myQuery.getResultList();
+	}
+
+	@Override
+	public List<FacturaSencilla> buscarPorFechaSencilla(LocalDateTime fecha) {
+		//FacturaSencilla(String numero, String cedula)
+		TypedQuery<FacturaSencilla> myQuery = this.entityManager
+				.createQuery("SELECT NEW ec.edu.uce.modelo.jpa.FacturaSencilla(f.numero, f.cedula) FROM Factura f JOIN f.detalles d WHERE f.fecha <=: fecha", FacturaSencilla.class);
+
+		myQuery.setParameter("fecha", fecha);
+
+		return myQuery.getResultList();
 	}
 
 }
