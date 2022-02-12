@@ -1,9 +1,6 @@
 package ec.edu.uce;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.time.Month;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -13,10 +10,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import ec.edu.uce.modelo.jpa.Cliente;
-import ec.edu.uce.modelo.jpa.DetalleFactura;
-import ec.edu.uce.modelo.jpa.Factura;
-import ec.edu.uce.modelo.jpa.FacturaSencilla;
+import ec.edu.uce.modelo.jpa.Turista;
 import ec.edu.uce.service.IAnimalService;
 import ec.edu.uce.service.IAvionService;
 import ec.edu.uce.service.ICancionService;
@@ -39,6 +33,7 @@ import ec.edu.uce.service.IPresidenteService;
 import ec.edu.uce.service.IProfesorService;
 import ec.edu.uce.service.IRecetaService;
 import ec.edu.uce.service.ITiendaService;
+import ec.edu.uce.service.ITuristaService;
 import ec.edu.uce.service.IUniversidadService;
 import ec.edu.uce.service.IVehiculoService;
 
@@ -119,6 +114,9 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 	@Autowired
 	private IClienteService clienteService;
 
+	@Autowired
+	private ITuristaService turistaService;
+
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoSpringJpaJmApplication.class, args);
 	}
@@ -126,41 +124,53 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-//Taller 27**************************************************************************************************
-		LocalDateTime fecha = LocalDateTime.of(2022, Month.AUGUST, 8, 10, 30);
-		
-		List<FacturaSencilla> lista = this.facService.buscarPorFechaSencilla(fecha);
-		LOG.info("Longitud Lista Sencilla: " + lista.size());
-		for (FacturaSencilla f : lista) {
-			LOG.info(f.toString());
-		}
-		
-		//Collection
-		List<String> lista1 = new ArrayList<>();
+		Turista turista = new Turista();
+		turista.setNombre("Tatiana Mendez");
+		turista.setAbono(new BigDecimal(500.0));
+		turista.setValor(new BigDecimal(1000.0));
 
-		lista1.add("0982565454");
-		lista1.add("023690074");
+		this.turistaService.insertarTurista(turista);
 
-		Cliente cliente = new Cliente();
-		cliente.setNombre("Joselyn Moncayo");
-		cliente.setTelefonos(lista1);
-
-		this.clienteService.guardarCliente(cliente);
-
-//Taller 26***************************************************************************************************
-
-		List<Factura> list= this.facService.buscarPorFechaJOINFetch(fecha);
-		LOG.info("Longitud JOIN Fetch: " + list.size());
-		for (Factura f : list) {
-			LOG.info("Detalles: " + f.getDetalles());
-			LOG.info(f.toString());
+		List<Turista> lista = this.turistaService.obtenerTodosTuristas();
+		for (Turista t : lista) {
+			LOG.info(t.toString());
 		}
 
-		List<DetalleFactura> lista2 = this.detalleFacturaService.buscarProductos(new BigDecimal(1), fecha);
-		LOG.info("Longitud JOIN Fetch, Detalle por fecha de precio: " + lista2.size());
-		for (DetalleFactura d : lista2) {
-			LOG.info(d.toString());
-		}
+////Taller 27**************************************************************************************************
+//		LocalDateTime fecha = LocalDateTime.of(2022, Month.AUGUST, 8, 10, 30);
+//		
+//		List<FacturaSencilla> lista = this.facService.buscarPorFechaSencilla(fecha);
+//		LOG.info("Longitud Lista Sencilla: " + lista.size());
+//		for (FacturaSencilla f : lista) {
+//			LOG.info(f.toString());
+//		}
+//		
+//		//Collection
+//		List<String> lista1 = new ArrayList<>();
+//
+//		lista1.add("0982565454");
+//		lista1.add("023690074");
+//
+//		Cliente cliente = new Cliente();
+//		cliente.setNombre("Joselyn Moncayo");
+//		cliente.setTelefonos(lista1);
+//
+//		this.clienteService.guardarCliente(cliente);
+//
+////Taller 26***************************************************************************************************
+//
+//		List<Factura> list= this.facService.buscarPorFechaJOINFetch(fecha);
+//		LOG.info("Longitud JOIN Fetch: " + list.size());
+//		for (Factura f : list) {
+//			LOG.info("Detalles: " + f.getDetalles());
+//			LOG.info(f.toString());
+//		}
+//
+//		List<DetalleFactura> lista2 = this.detalleFacturaService.buscarProductos(new BigDecimal(1), fecha);
+//		LOG.info("Longitud JOIN Fetch, Detalle por fecha de precio: " + lista2.size());
+//		for (DetalleFactura d : lista2) {
+//			LOG.info(d.toString());
+//		}
 //**************************************************************************************************************		
 
 //		List<Capital> lista = this.capitalService.buscarCapitalPorPoblacionJOIN(990000000);

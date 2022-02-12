@@ -10,7 +10,6 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import ec.edu.uce.modelo.jpa.Capital;
-import ec.edu.uce.modelo.jpa.Factura;
 
 @Repository
 @Transactional
