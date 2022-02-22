@@ -131,20 +131,29 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 		
 		
 		CuentaBancaria cuenta = new CuentaBancaria();
-		cuenta.setClienteCedula("1750987548");
-		cuenta.setNumero("225426");
-		cuenta.setSaldo(new BigDecimal(200.2));
+		cuenta.setClienteCedula("871222");
+		cuenta.setNumero("96");
+		cuenta.setSaldo(new BigDecimal(300.2));
 		cuenta.setTipo("Ahorro");
 		
 		CuentaBancaria cuenta1 = new CuentaBancaria();
-		cuenta1.setClienteCedula("15466565");
-		cuenta1.setNumero("2546");
+		cuenta1.setClienteCedula("45563333");
+		cuenta1.setNumero("25");
 		cuenta1.setSaldo(new BigDecimal(200.2));
 		cuenta1.setTipo("Ahorro");
 		
-		this.cuentaBService.insertar(cuenta1);
+//		this.cuentaBService.insertar(cuenta1);
+//		
+//		this.cuentaBService.insertar(cuenta);
 		
-		this.cuentaBService.insertar(cuenta);
+		this.cuentaBService.realizarTransferencia("96", "25", new BigDecimal(20.0));
+		
+//		CuentaBancaria c = this.cuentaBService.buscarPorNumero("225426");
+//		LOG.info(c.toString());
+		
+//		this.cuentaBService.insertar(cuenta);
+//		
+//		this.cuentaBService.insertar(cuenta);
 		
 
 //		Turista turista = new Turista();
