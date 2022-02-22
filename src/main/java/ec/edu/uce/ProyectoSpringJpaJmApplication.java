@@ -1,7 +1,7 @@
 package ec.edu.uce;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.time.LocalDateTime;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +11,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import ec.edu.uce.modelo.jpa.CuentaBancaria;
-import ec.edu.uce.modelo.jpa.Turista;
+import ec.edu.uce.modelo.jpa.TarjetaCredito;
+import ec.edu.uce.repository.jpa.ITarjetaCreditoRepo;
 import ec.edu.uce.service.IAnimalService;
 import ec.edu.uce.service.IAvionService;
 import ec.edu.uce.service.ICancionService;
@@ -34,6 +35,7 @@ import ec.edu.uce.service.IPeliculaService;
 import ec.edu.uce.service.IPresidenteService;
 import ec.edu.uce.service.IProfesorService;
 import ec.edu.uce.service.IRecetaService;
+import ec.edu.uce.service.ITarjetaCreditoService;
 import ec.edu.uce.service.ITiendaService;
 import ec.edu.uce.service.ITuristaService;
 import ec.edu.uce.service.IUniversidadService;
@@ -121,6 +123,9 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 	
 	@Autowired
 	private ICuentaBancariaService cuentaBService;
+	
+	@Autowired
+	private ITarjetaCreditoService tarjetaService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoSpringJpaJmApplication.class, args);
@@ -129,24 +134,39 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
+		TarjetaCredito tc1 = new TarjetaCredito();
+		tc1.setCedulaPropietario("1455875598");
+		tc1.setCupo(new BigDecimal(2000.00));
+		tc1.setNumeroTarjeta("788822456");
 		
-		CuentaBancaria cuenta = new CuentaBancaria();
-		cuenta.setClienteCedula("871222");
-		cuenta.setNumero("96");
-		cuenta.setSaldo(new BigDecimal(300.2));
-		cuenta.setTipo("Ahorro");
+		TarjetaCredito tc2 = new TarjetaCredito();
+		tc2.setCedulaPropietario("1147852196");
+		tc2.setCupo(new BigDecimal(3000.00));
+		tc2.setNumeroTarjeta("12254666899");
 		
-		CuentaBancaria cuenta1 = new CuentaBancaria();
-		cuenta1.setClienteCedula("45563333");
-		cuenta1.setNumero("25");
-		cuenta1.setSaldo(new BigDecimal(200.2));
-		cuenta1.setTipo("Ahorro");
+		this.tarjetaService.compra("12254666899", new BigDecimal(300.0), LocalDateTime.now());
 		
+//		this.tarjetaService.insertar(tc2);
+//		this.tarjetaService.insertar(tc1);
+		
+		
+//		CuentaBancaria cuenta = new CuentaBancaria();
+//		cuenta.setClienteCedula("871222");
+//		cuenta.setNumero("96");
+//		cuenta.setSaldo(new BigDecimal(300.2));
+//		cuenta.setTipo("Ahorro");
+//		
+//		CuentaBancaria cuenta1 = new CuentaBancaria();
+//		cuenta1.setClienteCedula("45563333");
+//		cuenta1.setNumero("25");
+//		cuenta1.setSaldo(new BigDecimal(200.2));
+//		cuenta1.setTipo("Ahorro");
+//		
 //		this.cuentaBService.insertar(cuenta1);
 //		
 //		this.cuentaBService.insertar(cuenta);
-		
-		this.cuentaBService.realizarTransferencia("96", "25", new BigDecimal(20.0));
+//		
+//		this.cuentaBService.realizarTransferencia("96", "25", new BigDecimal(20.0));
 		
 //		CuentaBancaria c = this.cuentaBService.buscarPorNumero("225426");
 //		LOG.info(c.toString());
