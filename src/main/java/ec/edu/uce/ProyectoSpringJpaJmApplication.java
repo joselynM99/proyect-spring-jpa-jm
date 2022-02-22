@@ -10,6 +10,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import ec.edu.uce.modelo.jpa.CuentaBancaria;
 import ec.edu.uce.modelo.jpa.Turista;
 import ec.edu.uce.service.IAnimalService;
 import ec.edu.uce.service.IAvionService;
@@ -18,6 +19,7 @@ import ec.edu.uce.service.ICapitalService;
 import ec.edu.uce.service.ICasaService;
 import ec.edu.uce.service.ICiudadService;
 import ec.edu.uce.service.IClienteService;
+import ec.edu.uce.service.ICuentaBancariaService;
 import ec.edu.uce.service.ICuentaService;
 import ec.edu.uce.service.IDetalleFacturaService;
 import ec.edu.uce.service.IEmpleadoService;
@@ -116,6 +118,9 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 
 	@Autowired
 	private ITuristaService turistaService;
+	
+	@Autowired
+	private ICuentaBancariaService cuentaBService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoSpringJpaJmApplication.class, args);
@@ -123,18 +128,36 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		
+		
+		CuentaBancaria cuenta = new CuentaBancaria();
+		cuenta.setClienteCedula("1750987548");
+		cuenta.setNumero("225426");
+		cuenta.setSaldo(new BigDecimal(200.2));
+		cuenta.setTipo("Ahorro");
+		
+		CuentaBancaria cuenta1 = new CuentaBancaria();
+		cuenta1.setClienteCedula("15466565");
+		cuenta1.setNumero("2546");
+		cuenta1.setSaldo(new BigDecimal(200.2));
+		cuenta1.setTipo("Ahorro");
+		
+		this.cuentaBService.insertar(cuenta1);
+		
+		this.cuentaBService.insertar(cuenta);
+		
 
-		Turista turista = new Turista();
-		turista.setNombre("Tatiana Mendez");
-		turista.setAbono(new BigDecimal(500.0));
-		turista.setValor(new BigDecimal(1000.0));
-
-		this.turistaService.insertarTurista(turista);
-
-		List<Turista> lista = this.turistaService.obtenerTodosTuristas();
-		for (Turista t : lista) {
-			LOG.info(t.toString());
-		}
+//		Turista turista = new Turista();
+//		turista.setNombre("Tatiana Mendez");
+//		turista.setAbono(new BigDecimal(500.0));
+//		turista.setValor(new BigDecimal(1000.0));
+//
+//		this.turistaService.insertarTurista(turista);
+//
+//		List<Turista> lista = this.turistaService.obtenerTodosTuristas();
+//		for (Turista t : lista) {
+//			LOG.info(t.toString());
+//		}
 
 ////Taller 27**************************************************************************************************
 //		LocalDateTime fecha = LocalDateTime.of(2022, Month.AUGUST, 8, 10, 30);
