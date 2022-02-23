@@ -10,4 +10,6 @@ public interface ICuentaBancariaRepo {
 
 	void actualizar(CuentaBancaria cuenta);
 
+	void actualizar2(CuentaBancaria cuenta);
+
 }
