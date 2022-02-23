@@ -120,10 +120,10 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 
 	@Autowired
 	private ITuristaService turistaService;
-	
+
 	@Autowired
 	private ICuentaBancariaService cuentaBService;
-	
+
 	@Autowired
 	private ITarjetaCreditoService tarjetaService;
 
@@ -133,23 +133,24 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		
-		TarjetaCredito tc1 = new TarjetaCredito();
-		tc1.setCedulaPropietario("1455875598");
-		tc1.setCupo(new BigDecimal(2000.00));
-		tc1.setNumeroTarjeta("788822456");
-		
-		TarjetaCredito tc2 = new TarjetaCredito();
-		tc2.setCedulaPropietario("1147852196");
-		tc2.setCupo(new BigDecimal(3000.00));
-		tc2.setNumeroTarjeta("12254666899");
-		
-		this.tarjetaService.compra("12254666899", new BigDecimal(300.0), LocalDateTime.now());
-		
+
+		this.cuentaBService.realizarTransferencia("96", "25", new BigDecimal(10.0));
+
+//		TarjetaCredito tc1 = new TarjetaCredito();
+//		tc1.setCedulaPropietario("1455875598");
+//		tc1.setCupo(new BigDecimal(2000.00));
+//		tc1.setNumeroTarjeta("788822456");
+//		
+//		TarjetaCredito tc2 = new TarjetaCredito();
+//		tc2.setCedulaPropietario("1147852196");
+//		tc2.setCupo(new BigDecimal(3000.00));
+//		tc2.setNumeroTarjeta("12254666899");
+//		
+//		this.tarjetaService.compra("12254666899", new BigDecimal(300.0), LocalDateTime.now());
+//		
 //		this.tarjetaService.insertar(tc2);
 //		this.tarjetaService.insertar(tc1);
-		
-		
+
 //		CuentaBancaria cuenta = new CuentaBancaria();
 //		cuenta.setClienteCedula("871222");
 //		cuenta.setNumero("96");
@@ -166,15 +167,13 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 //		
 //		this.cuentaBService.insertar(cuenta);
 //		
-//		this.cuentaBService.realizarTransferencia("96", "25", new BigDecimal(20.0));
-		
+
 //		CuentaBancaria c = this.cuentaBService.buscarPorNumero("225426");
 //		LOG.info(c.toString());
-		
+
 //		this.cuentaBService.insertar(cuenta);
 //		
 //		this.cuentaBService.insertar(cuenta);
-		
 
 //		Turista turista = new Turista();
 //		turista.setNombre("Tatiana Mendez");

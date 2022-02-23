@@ -1,12 +1,12 @@
 package ec.edu.uce.repository.jpa;
 
-import java.math.BigDecimal;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import ec.edu.uce.modelo.jpa.CuentaBancaria;
@@ -14,6 +14,8 @@ import ec.edu.uce.modelo.jpa.CuentaBancaria;
 @Transactional
 @Repository
 public class CuentaBancariaRepoImpl implements ICuentaBancariaRepo {
+
+	private static final Logger LOG = LoggerFactory.getLogger(CuentaBancariaRepoImpl.class);
 
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -23,13 +25,21 @@ public class CuentaBancariaRepoImpl implements ICuentaBancariaRepo {
 		this.entityManager.persist(cuenta);
 	}
 
-
 	@Override
 	public void actualizar(CuentaBancaria cuenta) {
 		this.entityManager.merge(cuenta);
-		
+
 	}
 
+	@Override
+	public void actualizar2(CuentaBancaria cuenta) {
+		this.entityManager.merge(cuenta);
+
+		throw new ArrayIndexOutOfBoundsException();
+
+		
+
+	}
 
 	@Override
 	public CuentaBancaria buscarPorNumero(String numero) {
@@ -38,7 +48,5 @@ public class CuentaBancariaRepoImpl implements ICuentaBancariaRepo {
 		myQuery.setParameter("numero", numero);
 		return myQuery.getSingleResult();
 	}
-
-
 
 }
