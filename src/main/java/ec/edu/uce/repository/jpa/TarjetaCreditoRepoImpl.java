@@ -34,11 +34,11 @@ public class TarjetaCreditoRepoImpl implements ITarjetaCreditoRepo {
 	public void actualizar2(TarjetaCredito tarjeta) {
 		this.entityManager.merge(tarjeta);
 		
-//		try {
+		try {
 			throw new ArrayIndexOutOfBoundsException();
-//		}catch(ArrayIndexOutOfBoundsException e) {
-//			LOG.error("Error");
-//		}
+		}catch(ArrayIndexOutOfBoundsException e) {
+			LOG.error("Error");
+		}
 
 	}
 

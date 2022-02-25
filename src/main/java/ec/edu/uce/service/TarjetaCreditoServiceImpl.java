@@ -55,11 +55,11 @@ public class TarjetaCreditoServiceImpl implements ITarjetaCreditoService {
 		t.setConsumos(lista);
 		t.setCupo(t.getCupo().subtract(valorCompra));
 		
-		try {
+//		try {
 			this.tarjetaRepo.actualizar2(t);
-		}catch(ArrayIndexOutOfBoundsException e) {
-			LOG.error("Error");
-		}
+//		}catch(ArrayIndexOutOfBoundsException e) {
+//			LOG.error("Error");
+//		}
 		
 
 	}
