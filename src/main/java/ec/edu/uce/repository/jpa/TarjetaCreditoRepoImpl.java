@@ -5,13 +5,17 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import ec.edu.uce.modelo.jpa.TarjetaCredito;
+import ec.edu.uce.service.CuentaBancariaServiceImpl;
 
 @Transactional
 @Repository
 public class TarjetaCreditoRepoImpl implements ITarjetaCreditoRepo {
+	private static final Logger LOG = LoggerFactory.getLogger(TarjetaCreditoRepoImpl.class);
 
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -24,6 +28,18 @@ public class TarjetaCreditoRepoImpl implements ITarjetaCreditoRepo {
 	@Override
 	public void actualizar(TarjetaCredito tarjeta) {
 		this.entityManager.merge(tarjeta);
+	}
+	
+	@Override
+	public void actualizar2(TarjetaCredito tarjeta) {
+		this.entityManager.merge(tarjeta);
+		
+//		try {
+			throw new ArrayIndexOutOfBoundsException();
+//		}catch(ArrayIndexOutOfBoundsException e) {
+//			LOG.error("Error");
+//		}
+
 	}
 
 	@Override

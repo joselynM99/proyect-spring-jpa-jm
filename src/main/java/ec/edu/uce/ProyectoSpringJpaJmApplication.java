@@ -10,9 +10,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import ec.edu.uce.modelo.jpa.CuentaBancaria;
-import ec.edu.uce.modelo.jpa.TarjetaCredito;
-import ec.edu.uce.repository.jpa.ITarjetaCreditoRepo;
 import ec.edu.uce.service.IAnimalService;
 import ec.edu.uce.service.IAvionService;
 import ec.edu.uce.service.ICancionService;
@@ -134,6 +131,9 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
+		this.tarjetaService.compra("12254666899", new BigDecimal(300.0), LocalDateTime.now());
+
+		
 //		TarjetaCredito tc1 = new TarjetaCredito();
 //		tc1.setCedulaPropietario("1455875598");
 //		tc1.setCupo(new BigDecimal(2000.00));
@@ -166,7 +166,7 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 //		
 //		this.cuentaBService.insertar(cuenta);
 //		
-		this.cuentaBService.realizarTransferencia("96", "25", new BigDecimal(20.0));
+//		this.cuentaBService.realizarTransferencia("96", "25", new BigDecimal(20.0));
 		
 //		CuentaBancaria c = this.cuentaBService.buscarPorNumero("225426");
 //		LOG.info(c.toString());

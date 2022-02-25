@@ -10,4 +10,6 @@ public interface ITarjetaCreditoRepo {
 
 	TarjetaCredito buscarTarjetaPorNumero(String numero);
 
+	void actualizar2(TarjetaCredito tarjeta);
+
 }

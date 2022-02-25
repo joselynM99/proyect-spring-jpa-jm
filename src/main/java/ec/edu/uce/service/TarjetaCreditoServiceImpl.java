@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,9 @@ import ec.edu.uce.repository.jpa.ITarjetaCreditoRepo;
 
 @Service
 public class TarjetaCreditoServiceImpl implements ITarjetaCreditoService {
+	
+	private static final Logger LOG = LoggerFactory.getLogger(TarjetaCreditoServiceImpl.class);
+
 
 	@Autowired
 	private ITarjetaCreditoRepo tarjetaRepo;
@@ -47,10 +52,15 @@ public class TarjetaCreditoServiceImpl implements ITarjetaCreditoService {
 		this.consumoRepo.insertar(consumo);
 		lista.add(consumo);
 
-		t.setCedulaPropietario(null);
 		t.setConsumos(lista);
 		t.setCupo(t.getCupo().subtract(valorCompra));
-		this.actualizar(t);
+		
+		try {
+			this.tarjetaRepo.actualizar2(t);
+		}catch(ArrayIndexOutOfBoundsException e) {
+			LOG.error("Error");
+		}
+		
 
 	}
 
