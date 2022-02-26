@@ -131,9 +131,10 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		this.tarjetaService.compra("12254666899", new BigDecimal(300.0), LocalDateTime.now());
-
+		this.cuentaBService.realizarTransferencia("96", "25", new BigDecimal(20.0));
 		
+//		this.tarjetaService.compra("12254666899", new BigDecimal(300.0), LocalDateTime.now());
+				
 //		TarjetaCredito tc1 = new TarjetaCredito();
 //		tc1.setCedulaPropietario("1455875598");
 //		tc1.setCupo(new BigDecimal(2000.00));
@@ -166,7 +167,7 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 //		
 //		this.cuentaBService.insertar(cuenta);
 //		
-//		this.cuentaBService.realizarTransferencia("96", "25", new BigDecimal(20.0));
+		
 		
 //		CuentaBancaria c = this.cuentaBService.buscarPorNumero("225426");
 //		LOG.info(c.toString());

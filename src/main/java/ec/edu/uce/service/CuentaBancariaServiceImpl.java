@@ -3,6 +3,7 @@ package ec.edu.uce.service;
 import java.math.BigDecimal;
 
 import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +15,7 @@ import ec.edu.uce.repository.jpa.ICuentaBancariaRepo;
 
 @Service
 public class CuentaBancariaServiceImpl implements ICuentaBancariaService {
-	
+
 	private static final Logger LOG = LoggerFactory.getLogger(CuentaBancariaServiceImpl.class);
 
 	@Autowired
@@ -31,6 +32,7 @@ public class CuentaBancariaServiceImpl implements ICuentaBancariaService {
 	}
 
 	@Override
+//	@Transactional(value = TxType.NOT_SUPPORTED)
 	public CuentaBancaria buscarPorNumero(String numero) {
 		return this.cuentaRepo.buscarPorNumero(numero);
 	}
@@ -40,23 +42,26 @@ public class CuentaBancariaServiceImpl implements ICuentaBancariaService {
 	public void realizarTransferencia(String cuentaOrigen, String cuentaDestino, BigDecimal saldoTransferir) {
 		CuentaBancaria cuentaOri = this.buscarPorNumero(cuentaOrigen);
 		CuentaBancaria cuentaDesti = this.buscarPorNumero(cuentaDestino);
-		
+
 		BigDecimal nuevoSaldoOrigen = cuentaOri.getSaldo().subtract(saldoTransferir);
 		cuentaOri.setSaldo(nuevoSaldoOrigen);
 
 		BigDecimal nuevoSaldoDestino = cuentaDesti.getSaldo().add(saldoTransferir);
 		cuentaDesti.setSaldo(nuevoSaldoDestino);
 
-		this.cuentaRepo.actualizar(cuentaDesti);
 		LOG.info("AA1");
-		this.cuentaRepo.actualizar(cuentaOri);
+		try {
+			this.cuentaRepo.actualizar(cuentaOri);
+		} catch (ArrayIndexOutOfBoundsException e) {
+			LOG.error("Error");
+		}
 		LOG.info("DA1");
 
 		LOG.info("AA2");
 		try {
 			this.cuentaRepo.actualizar2(cuentaDesti);
 
-		}catch(ArrayIndexOutOfBoundsException e) {
+		} catch (ArrayIndexOutOfBoundsException e) {
 			LOG.error("Error");
 		}
 		LOG.info("DA2");
