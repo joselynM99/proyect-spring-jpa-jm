@@ -1,7 +1,8 @@
 package ec.edu.uce;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,14 +11,18 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import ec.edu.uce.modelo.jpa.CuentaBancariaCA;
+import ec.edu.uce.modelo.jpa.CuentaHabiente;
 import ec.edu.uce.service.IAnimalService;
 import ec.edu.uce.service.IAvionService;
+import ec.edu.uce.service.ICajeroAutomaticoService;
 import ec.edu.uce.service.ICancionService;
 import ec.edu.uce.service.ICapitalService;
 import ec.edu.uce.service.ICasaService;
 import ec.edu.uce.service.ICiudadService;
 import ec.edu.uce.service.IClienteService;
 import ec.edu.uce.service.ICuentaBancariaService;
+import ec.edu.uce.service.ICuentaHabienteService;
 import ec.edu.uce.service.ICuentaService;
 import ec.edu.uce.service.IDetalleFacturaService;
 import ec.edu.uce.service.IEmpleadoService;
@@ -123,6 +128,12 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 	
 	@Autowired
 	private ITarjetaCreditoService tarjetaService;
+	
+	@Autowired
+	private ICuentaHabienteService cuentaHabienteService;
+	
+	@Autowired
+	private ICajeroAutomaticoService cajeroAuromatico;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoSpringJpaJmApplication.class, args);
@@ -131,7 +142,49 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		this.cuentaBService.realizarTransferencia("96", "25", new BigDecimal(20.0));
+		this.cajeroAuromatico.consultarCuentas("1744568895");
+		this.cajeroAuromatico.retiro("2223654897", new BigDecimal(20.0));
+		this.cajeroAuromatico.retiro("8992255563", new BigDecimal(200.0));
+		this.cajeroAuromatico.consultarSaldo("8992255563");
+		
+		CuentaHabiente ch1= new CuentaHabiente();
+		ch1.setApellido("Perez");
+		ch1.setNombre("José");
+		ch1.setCedula("1744568895");
+		
+		CuentaBancariaCA c1 = new CuentaBancariaCA();
+		c1.setNumero("2223654897");
+		c1.setSaldo(new BigDecimal(500.0));
+		c1.setTipo("Ahorro");
+		c1.setCuentaHabiente(ch1);
+		
+		List<CuentaBancariaCA> listaCuentasB1 = new ArrayList<CuentaBancariaCA>();
+		listaCuentasB1.add(c1);
+		
+		ch1.setCuentasBancarias(listaCuentasB1);
+		
+//		this.cuentaHabienteService.insertar(ch1);
+		
+		
+		CuentaHabiente ch2= new CuentaHabiente();
+		ch2.setApellido("Mendoza");
+		ch2.setNombre("Laura");
+		ch2.setCedula("11487966566");
+		
+		CuentaBancariaCA c2 = new CuentaBancariaCA();
+		c2.setNumero("8992255563");
+		c2.setSaldo(new BigDecimal(1500.0));
+		c2.setTipo("Ahorro");
+		c2.setCuentaHabiente(ch2);
+		
+		List<CuentaBancariaCA> listaCuentasB2 = new ArrayList<CuentaBancariaCA>();
+		listaCuentasB2.add(c2);
+		
+		ch2.setCuentasBancarias(listaCuentasB2);
+		
+//		this.cuentaHabienteService.insertar(ch2);
+		
+//		this.cuentaBService.realizarTransferencia("96", "25", new BigDecimal(20.0));
 		
 //		this.tarjetaService.compra("12254666899", new BigDecimal(300.0), LocalDateTime.now());
 				
