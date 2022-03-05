@@ -32,7 +32,7 @@ public class CuentaBancariaServiceImpl implements ICuentaBancariaService {
 	}
 
 	@Override
-//	@Transactional(value = TxType.NOT_SUPPORTED)
+	@Transactional(value = TxType.NOT_SUPPORTED)//Para optimizar, buena practica
 	public CuentaBancaria buscarPorNumero(String numero) {
 		return this.cuentaRepo.buscarPorNumero(numero);
 	}
@@ -58,14 +58,69 @@ public class CuentaBancariaServiceImpl implements ICuentaBancariaService {
 		LOG.info("DA1");
 
 		LOG.info("AA2");
-		try {
-			this.cuentaRepo.actualizar2(cuentaDesti);
+		this.cuentaRepo.actualizar(cuentaDesti);
 
-		} catch (ArrayIndexOutOfBoundsException e) {
-			LOG.error("Error");
-		}
 		LOG.info("DA2");
 
+	}
+
+	@Override
+	@Transactional
+	public void realizarTransferenciaExpressInicial(String cuentaOrigen, String cuentaDestino,
+			BigDecimal saldoTransferir) {
+		this.realizarTransferenciaExpress(cuentaOrigen, cuentaDestino, saldoTransferir);
+	}
+
+	/**
+	 * Metodo no es transaccional Segundo escenario
+	 */
+	@Override
+	@Transactional
+	public void realizarTransferenciaExpressInicialNot(String cuentaOrigen, String cuentaDestino,
+			BigDecimal saldoTransferir) {
+		this.realizarTransferenciaExpress(cuentaOrigen, cuentaDestino, saldoTransferir);
+	}
+
+	@Override
+//	@Transactional(value = TxType.SUPPORTS)
+	@Transactional(value = TxType.REQUIRES_NEW)
+	public void realizarTransferenciaExpress(String cuentaOrigen, String cuentaDestino, BigDecimal saldoTransferir) {
+		LOG.info("Ejecucion Support");
+		CuentaBancaria cuentaOri = this.buscarPorNumero(cuentaOrigen);
+		CuentaBancaria cuentaDesti = this.buscarPorNumero(cuentaDestino);
+
+		BigDecimal nuevoSaldoOrigen = cuentaOri.getSaldo().subtract(saldoTransferir);
+		cuentaOri.setSaldo(nuevoSaldoOrigen);
+
+		BigDecimal nuevoSaldoDestino = cuentaDesti.getSaldo().add(saldoTransferir);
+		cuentaDesti.setSaldo(nuevoSaldoDestino);
+
+		this.cuentaRepo.actualizar(cuentaOri);
+
+		this.cuentaRepo.actualizar(cuentaDesti);
+
+	}
+
+	@Transactional
+	public void enviarEmail() {
+		this.cuentaRepo.enviarMail("Correo de clases");
+
+	}
+
+	
+	public void enviarEmailNoT() {
+		this.cuentaRepo.enviarMail("Correo de clases NoT");
+	}
+
+	@Transactional(value = TxType.SUPPORTS)
+	public void propagacionSupports() {
+
+	}
+
+	@Override
+	@Transactional(value = TxType.MANDATORY)
+	public void propagacionMandatory() {
+		LOG.info("Ejecucion Mandatoria");
 	}
 
 }

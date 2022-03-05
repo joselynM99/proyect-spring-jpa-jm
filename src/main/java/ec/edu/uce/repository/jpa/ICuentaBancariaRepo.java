@@ -12,4 +12,7 @@ public interface ICuentaBancariaRepo {
 
 	void actualizar2(CuentaBancaria cuenta);
 
+	void enviarMail(String string);
+
+
 }

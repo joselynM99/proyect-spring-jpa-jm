@@ -22,7 +22,7 @@ public class HistoricoRetirosRepo implements IHistoricoRetirosRepo{
 	@Override
 	public void insertar(HistoricoRetiros retiros) {
 		this.entityManager.persist(retiros);
-		throw new ArrayIndexOutOfBoundsException();
+		//throw new ArrayIndexOutOfBoundsException();
 	}
 
 	@Override

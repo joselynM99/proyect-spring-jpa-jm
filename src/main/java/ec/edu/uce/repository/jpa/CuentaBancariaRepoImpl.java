@@ -27,7 +27,7 @@ public class CuentaBancariaRepoImpl implements ICuentaBancariaRepo {
 	}
 
 	@Override
-	@Transactional(value = TxType.REQUIRES_NEW)
+	@Transactional(value = TxType.MANDATORY)
 	public void actualizar2(CuentaBancaria cuenta) {
 		this.entityManager.merge(cuenta);
 //		try {
@@ -35,14 +35,21 @@ public class CuentaBancariaRepoImpl implements ICuentaBancariaRepo {
 //		}catch(ArrayIndexOutOfBoundsException e) {
 //			LOG.error("Error");
 //		}
-}
-	
+	}
+
 	@Override
+	@Transactional(value = TxType.MANDATORY)
 	public void actualizar(CuentaBancaria cuenta) {
 		this.entityManager.merge(cuenta);
-		throw new ArrayIndexOutOfBoundsException();
+		//throw new ArrayIndexOutOfBoundsException();
 
-
+	}
+	
+	@Override
+	@Transactional(value =  TxType.NEVER)
+	public void enviarMail(String asunto) {
+		LOG.info("Se envia MAIL con asunto: "+asunto);
+		
 	}
 
 	@Override

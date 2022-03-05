@@ -49,11 +49,11 @@ public class CajeroAutomaticoService implements ICajeroAutomaticoService {
 		hRetiros.setMonto(valor);
 		hRetiros.setCuentaBancaria(cuentaBancaria);
 		hRetiros.setCuentaHabiente(cuentaBancaria.getCuentaHabiente());
-		try {
+//		try {
 		this.historicoService.insertar(hRetiros);
-		}catch(ArrayIndexOutOfBoundsException e) {
-			LOG.error("ERROR AL GUARDAR REGISTRO HISTORICO. NO SE PUDO REALIZAR EL RETIRO");
-		}
+//		}catch(ArrayIndexOutOfBoundsException e) {
+//			LOG.error("ERROR AL GUARDAR REGISTRO HISTORICO. NO SE PUDO REALIZAR EL RETIRO");
+//		}
 
 	}
 
