@@ -1,8 +1,6 @@
 package ec.edu.uce;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.time.Month;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,8 +9,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import ec.edu.uce.modelo.jpa.MembresiaGimnasio;
-import ec.edu.uce.repository.jpa.IMembresiaGimnasioRepo;
+import ec.edu.uce.interfaces.funcionales.IPersonaFuntion;
+import ec.edu.uce.interfaces.funcionales.IPersonaUnaryOperator;
+import ec.edu.uce.modelo.Paciente;
+import ec.edu.uce.service.CuentaBancariaFachadaServiceImpl;
 import ec.edu.uce.service.IAnimalService;
 import ec.edu.uce.service.IAvionService;
 import ec.edu.uce.service.ICajeroAutomaticoService;
@@ -124,24 +124,33 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 
 	@Autowired
 	private ITuristaService turistaService;
-	
+
 	@Autowired
 	private ICuentaBancariaService cuentaBService;
-	
+
 	@Autowired
 	private ITarjetaCreditoService tarjetaService;
-	
+
 	@Autowired
 	private ICuentaHabienteService cuentaHabienteService;
-	
+
 	@Autowired
 	private ICajeroAutomaticoService cajeroAuromatico;
-	
+
 	@Autowired
 	private IGestorGimnasioService gestorGimnasioService;
-	
+
 	@Autowired
 	private IMembresiaGimnasioService memebresiaService;
+
+	private IPersonaUnaryOperator<String> personaUnary;
+
+	public IPersonaFuntion<String, Paciente> personaFuntion;
+	
+	public IPersonaFuntion<String, String> personaFuntion1;
+	
+	@Autowired
+	public CuentaBancariaFachadaServiceImpl cuentaFachadaService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoSpringJpaJmApplication.class, args);
@@ -149,51 +158,49 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		
-		
+//		String prueba = this.personaUnary.apply("A");
+//		Paciente paci1 = this.personaFuntion.apply("B");
+//		String prueba1 = this.personaFuntion1.apply("C");
 //		
-//		this.gestorGimnasioService.insertarCliente("Tatiana", "Mendez", "112455553", LocalDateTime.of(1999, Month.AUGUST, 8, 0, 0), "N");
-//		this.gestorGimnasioService.insertarCliente("Maggy", "Ruiz", "17822832145", LocalDateTime.of(1987, Month.AUGUST, 20, 0, 0), "N");
+////		
+////		this.gestorGimnasioService.insertarCliente("Tatiana", "Mendez", "112455553", LocalDateTime.of(1999, Month.AUGUST, 8, 0, 0), "N");
+////		this.gestorGimnasioService.insertarCliente("Maggy", "Ruiz", "17822832145", LocalDateTime.of(1987, Month.AUGUST, 20, 0, 0), "N");
+//
+//		MembresiaGimnasio m = new MembresiaGimnasio();
+//		m.setCantidadClientes(0);
+//		m.setCodigo("485D");
+//		m.setNombre("Membresía Premium");
+//		m.setVigencia(LocalDateTime.of(2023, Month.APRIL, 28, 0,0));
+//		m.setValor(new BigDecimal(30.60));
+//		
+////		this.memebresiaService.insertar(m);
+//		
+//		this.gestorGimnasioService.pagarMembresia("17822832145", "485D");
+//		
 
-		MembresiaGimnasio m = new MembresiaGimnasio();
-		m.setCantidadClientes(0);
-		m.setCodigo("485D");
-		m.setNombre("Membresía Premium");
-		m.setVigencia(LocalDateTime.of(2023, Month.APRIL, 28, 0,0));
-		m.setValor(new BigDecimal(30.60));
-		
-//		this.memebresiaService.insertar(m);
-		
-		this.gestorGimnasioService.pagarMembresia("17822832145", "485D");
-		
-		
-		
-		//this.cuentaBService.propagacionMandatory();
-		
+		// this.cuentaBService.propagacionMandatory();
+
 //		this.cuentaHabienteService.insertar(ch2);
-		
-		//SUPPORT******************************************************************************************
-		//Escenario 1
+
+		// SUPPORT******************************************************************************************
+		// Escenario 1
 //		this.cuentaBService.realizarTransferenciaExpressInicial("25", "96", new BigDecimal(20.0));
 
-		//Escanario 2
-//		this.cuentaBService.realizarTransferenciaExpressInicialNot("25", "96", new BigDecimal(20.0));
-		
-		
-		//NEVER*********************************************************************************************
-		//Escenario 1
+		// Escanario 2
+		this.cuentaFachadaService.realizarTransferenciaExpressInicialNot("25", "96", new BigDecimal(20.0));
+
+		// NEVER*********************************************************************************************
+		// Escenario 1
 //		this.cuentaBService.enviarEmail();
-		
-		//Escenario 2
+
+		// Escenario 2
 //		this.cuentaBService.enviarEmailNoT();
-		
-		//NOT_SUPPORTED
+
+		// NOT_SUPPORTED
 //		this.cuentaBService.realizarTransferenciaExpressInicial("25", "96", new BigDecimal(20.0));
 
-		
-		
 //		this.tarjetaService.compra("12254666899", new BigDecimal(300.0), LocalDateTime.now());
-				
+
 //		TarjetaCredito tc1 = new TarjetaCredito();
 //		tc1.setCedulaPropietario("1455875598");
 //		tc1.setCupo(new BigDecimal(2000.00));
@@ -205,11 +212,10 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 //		tc2.setNumeroTarjeta("12254666899");
 //		
 //		this.tarjetaService.compra("12254666899", new BigDecimal(300.0), LocalDateTime.now());
-		
+
 //		this.tarjetaService.insertar(tc2);
 //		this.tarjetaService.insertar(tc1);
-		
-		
+
 //		CuentaBancaria cuenta = new CuentaBancaria();
 //		cuenta.setClienteCedula("871222");
 //		cuenta.setNumero("96");
@@ -226,15 +232,13 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 //		
 //		this.cuentaBService.insertar(cuenta);
 //		
-		
-		
+
 //		CuentaBancaria c = this.cuentaBService.buscarPorNumero("225426");
 //		LOG.info(c.toString());
-		
+
 //		this.cuentaBService.insertar(cuenta);
 //		
 //		this.cuentaBService.insertar(cuenta);
-		
 
 //		Turista turista = new Turista();
 //		turista.setNombre("Tatiana Mendez");
