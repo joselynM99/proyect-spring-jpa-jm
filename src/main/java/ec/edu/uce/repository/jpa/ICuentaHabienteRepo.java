@@ -1,6 +1,9 @@
 package ec.edu.uce.repository.jpa;
 
+import java.util.List;
+
 import ec.edu.uce.modelo.jpa.CuentaHabiente;
+import ec.edu.uce.modelo.jpa.CuentaHabienteVIPTO;
 
 public interface ICuentaHabienteRepo {
 	void insertar(CuentaHabiente cuentaHabiente);
@@ -13,5 +16,6 @@ public interface ICuentaHabienteRepo {
 	
 	CuentaHabiente buscarPorCedula(String cedula);
 
+	List<CuentaHabienteVIPTO> cuentasHabientes();
 
 }

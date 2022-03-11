@@ -1,9 +1,12 @@
 package ec.edu.uce.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ec.edu.uce.modelo.jpa.CuentaHabiente;
+import ec.edu.uce.modelo.jpa.CuentaHabienteVIPTO;
 import ec.edu.uce.repository.jpa.ICuentaHabienteRepo;
 
 @Service
@@ -37,6 +40,11 @@ public class CuentaHabienteService implements ICuentaHabienteService {
 	public CuentaHabiente buscarPorCedula(String cedula) {
 
 		return this.cuentaHabienteRepo.buscarPorCedula(cedula);
+	}
+	
+	@Override
+	public List<CuentaHabienteVIPTO> cuentasHabientes(){
+		return this.cuentaHabienteRepo.cuentasHabientes();
 	}
 
 }

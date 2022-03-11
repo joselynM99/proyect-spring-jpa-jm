@@ -1,6 +1,9 @@
 package ec.edu.uce;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +15,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import ec.edu.uce.interfaces.funcionales.IPersonaFuntion;
 import ec.edu.uce.interfaces.funcionales.IPersonaUnaryOperator;
 import ec.edu.uce.modelo.Paciente;
+import ec.edu.uce.modelo.jpa.CuentaBancariaCA;
+import ec.edu.uce.modelo.jpa.CuentaHabiente;
 import ec.edu.uce.service.CuentaBancariaFachadaServiceImpl;
 import ec.edu.uce.service.IAnimalService;
 import ec.edu.uce.service.IAvionService;
@@ -158,6 +163,63 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		
+//		this.cajeroAuromatico.consultarCuentas("1744568895");
+		
+		
+		
+		
+//		this.cajeroAuromatico.consultarSaldo("8992255563");
+		
+		this.cajeroAuromatico.reporteHistoricoRetiros(LocalDateTime.now(), new BigDecimal(10));
+		this.cajeroAuromatico.reporteCuentasVIP(new BigDecimal(10));
+		
+		CuentaHabiente ch1= new CuentaHabiente();
+		ch1.setApellido("KIM");
+		ch1.setNombre("José");
+		ch1.setCedula("188764545");
+
+		CuentaBancariaCA c1 = new CuentaBancariaCA();
+		c1.setNumero("5465664");
+		c1.setSaldo(new BigDecimal(500.0));
+		c1.setTipo("Ahorro");
+		c1.setCuentaHabiente(ch1);
+
+		List<CuentaBancariaCA> listaCuentasB1 = new ArrayList<CuentaBancariaCA>();
+		listaCuentasB1.add(c1);
+
+		ch1.setCuentasBancarias(listaCuentasB1);
+
+		this.cuentaHabienteService.insertar(ch1);
+
+
+		CuentaHabiente ch2= new CuentaHabiente();
+		ch2.setApellido("Mendoza");
+		ch2.setNombre("Luis");
+		ch2.setCedula("54872212");
+
+		CuentaBancariaCA c2 = new CuentaBancariaCA();
+		c2.setNumero("545454");
+		c2.setSaldo(new BigDecimal(1500.0));
+		c2.setTipo("Ahorro");
+		c2.setCuentaHabiente(ch2);
+
+		List<CuentaBancariaCA> listaCuentasB2 = new ArrayList<CuentaBancariaCA>();
+		listaCuentasB2.add(c2);
+
+		ch2.setCuentasBancarias(listaCuentasB2);
+
+		this.cuentaHabienteService.insertar(ch2);
+		
+		
+		this.cajeroAuromatico.retiro("2223654897", new BigDecimal(20.0));
+		this.cajeroAuromatico.retiro("8992255563", new BigDecimal(20.0));
+		this.cajeroAuromatico.retiro("8992255563", new BigDecimal(10.0));
+		this.cajeroAuromatico.retiro("5465664", new BigDecimal(20.0));
+		this.cajeroAuromatico.retiro("545454", new BigDecimal(20.0));
+		
+		
+		
 //		String prueba = this.personaUnary.apply("A");
 //		Paciente paci1 = this.personaFuntion.apply("B");
 //		String prueba1 = this.personaFuntion1.apply("C");
@@ -187,7 +249,7 @@ public class ProyectoSpringJpaJmApplication implements CommandLineRunner {
 //		this.cuentaBService.realizarTransferenciaExpressInicial("25", "96", new BigDecimal(20.0));
 
 		// Escanario 2
-		this.cuentaFachadaService.realizarTransferenciaExpressInicialNot("25", "96", new BigDecimal(20.0));
+//		this.cuentaFachadaService.realizarTransferenciaExpressInicialNot("25", "96", new BigDecimal(20.0));
 
 		// NEVER*********************************************************************************************
 		// Escenario 1

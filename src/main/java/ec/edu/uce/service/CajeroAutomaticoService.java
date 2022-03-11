@@ -2,6 +2,8 @@ package ec.edu.uce.service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Stream;
 
 import javax.transaction.Transactional;
 
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import ec.edu.uce.modelo.jpa.CuentaBancariaCA;
 import ec.edu.uce.modelo.jpa.CuentaHabiente;
+import ec.edu.uce.modelo.jpa.CuentaHabienteVIPTO;
 import ec.edu.uce.modelo.jpa.HistoricoRetiros;
 
 @Service
@@ -63,6 +66,24 @@ public class CajeroAutomaticoService implements ICajeroAutomaticoService {
 		LOG.info("Cuenta Bancaria número: " + cuentaBancaria.getNumero() + ". Saldo disponible: "
 				+ cuentaBancaria.getSaldo());
 
+	}
+
+	@Override
+	public void reporteHistoricoRetiros(LocalDateTime fechaRetiro, BigDecimal monto) {
+		List<HistoricoRetiros> retiros = this.historicoService.historicos();
+		Stream<HistoricoRetiros> listaRetiros = retiros.stream().filter(r -> r.getMonto().compareTo(monto) == 1)
+				.filter(r -> r.getFecha().isBefore(fechaRetiro));
+		listaRetiros.forEach(r -> LOG.info(r.getCuentaHabiente().getCedula() + "-" + r.getCuentaHabiente().getNombre()
+				+ "-" + r.getCuentaHabiente().getApellido() + "-" + r.getMonto() + "-" + r.getFecha()));
+
+	}
+
+	@Override
+	public void reporteCuentasVIP(BigDecimal saldo) {
+		List<CuentaHabienteVIPTO> cuentas = this.cuentaHabienteService.cuentasHabientes();
+		Stream<CuentaHabienteVIPTO> listaCuentas = cuentas.stream().filter(c -> c.getSaldo().compareTo(saldo) == 1);
+		listaCuentas.forEach(c -> LOG.info(c.getCedula() + "-" + c.getNombre() + "-" + c.getApellido() + "-"
+				+ c.getNumeroCuenta() + "-" + c.getTipo() + "-" + c.getSaldo()));
 	}
 
 }

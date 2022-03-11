@@ -1,5 +1,7 @@
 package ec.edu.uce.repository.jpa;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -10,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import ec.edu.uce.modelo.jpa.CuentaHabiente;
+import ec.edu.uce.modelo.jpa.CuentaHabienteVIPTO;
 
 @Repository
 @Transactional
@@ -49,6 +52,14 @@ public class CuentaHabienteRepo implements ICuentaHabienteRepo {
 		myQuery.setParameter("cedula", cedula);
 
 		return myQuery.getSingleResult();
+	}
+	
+	@Override
+	public List<CuentaHabienteVIPTO> cuentasHabientes(){
+		TypedQuery<CuentaHabienteVIPTO> myQuery = this.entityManager
+				.createQuery("SELECT NEW ec.edu.uce.modelo.jpa.CuentaHabienteVIPTO(c.nombre, c.apellido, c.cedula, b.saldo, b.tipo, b.numero) FROM CuentaHabiente c JOIN c.cuentasBancarias b", CuentaHabienteVIPTO.class);
+
+		return myQuery.getResultList();
 	}
 
 }
