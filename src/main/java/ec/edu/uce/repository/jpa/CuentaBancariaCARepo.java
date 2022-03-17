@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import ec.edu.uce.modelo.jpa.CuentaBancariaCA;
-import ec.edu.uce.modelo.jpa.Factura;
 
 @Transactional
 @Repository

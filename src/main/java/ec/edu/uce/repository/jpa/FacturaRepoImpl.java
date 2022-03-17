@@ -88,5 +88,16 @@ public class FacturaRepoImpl implements IFacturaRepo {
 
 		return myQuery.getResultList();
 	}
+	
+	@Override
+	public Factura buscarPorCedula(String cedula) {
+		//FacturaSencilla(String numero, String cedula)
+		TypedQuery<Factura> myQuery = this.entityManager
+				.createQuery("SELECT f FROM Factura f WHERE f.cedula =: cedula", Factura.class);
+
+		myQuery.setParameter("cedula", cedula);
+
+		return myQuery.getSingleResult();
+	}
 
 }

@@ -20,5 +20,7 @@ public interface IFacturaRepo {
 	
 	List<FacturaSencilla> buscarPorFechaSencilla(LocalDateTime fecha);
 
+	Factura buscarPorCedula(String cedula);
+
 
 }
